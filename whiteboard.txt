@@ -1,0 +1,16 @@
+* Whiteboard: 
+    * data model
+    * functions
+
+* think about architecture
+    * routes
+        * GET serve signup / login
+        * POST process signup / login
+    * views
+        * sign up / login
+    * apis
+    * file structure
+    * dependencies
+
+* write down business logic
+    * user stories
