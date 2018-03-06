@@ -99,26 +99,42 @@ describe.only('updatePostById', function() {
     title: 'gooooooo Mira!',
     body: 'hooray for bodies!',
   }
-  for (let prop in newData) {
-    let newPostRow
-    describe(`Updating ${prop}`, () => {
-      before('update the column', () => {
-        return updatePostById(1, { [prop]: newData[prop] })
-          .then(newPost => {
-            newPostRow = newPost
+  describe('update column data one-by-one', () => {
+    for (let prop in newData) {
+      let newPostRow
+      describe(`Updating ${prop}`, () => {
+        before('update the column', () => {
+          return updatePostById(1, { [prop]: newData[prop] })
+            .then(newPost => {
+              newPostRow = newPost
+          })
         })
+        it(`updates the ${prop}`, () => {
+          expect(newPostRow[prop]).to.equal(newData[prop])
+        })
+        for (let otherProp in newData) {
+          // make sure none of the other properties changed
+          if (otherProp !== prop) {
+            it(`does NOT update the ${otherProp}`, () => {
+              expect(newPostRow[otherProp]).to.equal(oldData[otherProp])
+            })
+          }
+        }
       })
+    }
+  })
+  describe('update all column data', () => {
+    let newPostRow
+    before('update all columns', () => {
+      return updatePostById(1, newData)
+      .then(result => {
+        newPostRow = result
+      })
+    })
+    for (let prop in newData) {
       it(`updates the ${prop}`, () => {
         expect(newPostRow[prop]).to.equal(newData[prop])
       })
-      for (let otherProp in newData) {
-        // make sure none of the other properties changed
-        if (otherProp !== prop) {
-          it(`does NOT update the ${otherProp}`, () => {
-            expect(newPostRow[otherProp]).to.equal(oldData[otherProp])
-          })
-        }
-      }
-    })
-  }
+    }
+  })
 })

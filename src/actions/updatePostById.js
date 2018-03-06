@@ -19,7 +19,7 @@ const updatePostById = function(id, newData) {
     WHERE id = $/id/
     RETURNING *
   `
-  return db.one(query, {title, body, id})
+  return db.one(query, Object.assign(newData, {id}))
 }
 
 module.exports = updatePostById

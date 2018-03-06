@@ -10,7 +10,7 @@
 
 ### February 22, 2018
 
-  - completed tests for `deletePostById` and *almost* finished function
+  - completed tests for `updatePostById` and *almost* finished function
 
 ### February 21, 2018
 
