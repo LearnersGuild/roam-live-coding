@@ -103,6 +103,10 @@ const seedDb = () => {
       }
       return db.one(createCommentQuery, commentParams)
     })
+    .then(() => {
+      // add city WITHOUT posts, called 'no_post_city'
+      return db.one(createCityQuery, {city: 'no_post_city'})
+    })
     .catch(error => {
       console.error(error)
       process.exit(1)

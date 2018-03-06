@@ -14,7 +14,7 @@ const getPostsByCityId = require('./getPostsByCityId')
  *    posts - value is array containing post data for city
  * (or null if the city wasn't found)
  */
-const getCityById = async (id) => {
+const getCityDataById = async (id) => {
   return Promise.resolve({})
   // const userData = await getUserByEmail(email)
   // if (!userData) return null
@@ -22,4 +22,4 @@ const getCityById = async (id) => {
   // return Object.assign(userData, { posts })
 }
 
-module.exports = getCityById
+module.exports = getCityDataById
