@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### February 14, 2018
+
+  - Discovered that abstracted property tests function wasn't actually running the tests; un-refactored.
+  - Created some tests for `getUserData` -- property set tests and values for some of the properties
+
 ### February 13, 2018
 
   - Discussed why Bonnie prefers one `expect` per test
