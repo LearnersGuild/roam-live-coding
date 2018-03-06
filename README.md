@@ -8,6 +8,14 @@
 
 ## Daily Log
 
+### January 31, 2018
+
+- Create `db.js` file
+- Start setting up for db testing
+  - create `db_reset.js` file
+  - create functions to truncate all tables
+  - start function to seed db
+
 ### January 30, 2018
 
 - Create file structure
