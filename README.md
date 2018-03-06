@@ -10,8 +10,13 @@
 
 ### February 13, 2018
 
+  - Discussed why Bonnie prefers one `expect` per test
   - Refactor property tests to make more DRY
-  - Write tests and code for `getUserData`
+  - Abstract out property tests into a function
+    - now can be used in multiple tests
+    - if we change to test in a different way it will affect all tests
+  - Discussed integration vs. unit tests and stub/mock
+  - Start to write tests and code for `getUserData`
 
 ### February 8, 2018
 

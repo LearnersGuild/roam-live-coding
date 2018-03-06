@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
+const { testProperties } = require('../utilities/test_properties')
 const addUser = require('../../src/actions/addUser')
 const getUserByEmail = require('../../src/actions/getUserByEmail')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
@@ -41,17 +42,15 @@ describe('getUserByEmail', function() {
         .then(() => getUserByEmail('test@test.test'))
         .then(result => userRow = result)
     })
-    Array(
-      'email', 
-      'password',
-      'joined_at',
-      'image_url',
-      'primary_city',
-      'id',
-    ).forEach(prop => {
-      it(`returns an object with the '${prop}' property`, () => {
-        expect(userRow).to.have.property(prop)
-      })
+    it('tests the properties', () => {
+      testProperties(userRow, [
+        'email', 
+        'password',
+        'joined_at',
+        'image_url',
+        'primary_city',
+        'id',
+      ]) 
     })
   })
   it('return null when the user does not exist', () => {
@@ -59,5 +58,16 @@ describe('getUserByEmail', function() {
       .then(userRow => {
         expect(userRow).to.be.null
       })
+  })
+})
+
+describe('getUserData', function() {
+  let userData
+  context('user exists', () => {
+    before('reset the database and retrieve existing user', () => {
+      return resetDb()
+        .then(() => getUserData('test@test.test'))
+        .then(result => userData = result)
+    })
   })
 })

@@ -7,6 +7,7 @@
       * users / auth
         * create new user
         * get user data for profile page
+          * incl user data
           * incl all user posts
           * incl all cities the user has posted about
         * check user/password for authentication
