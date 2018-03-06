@@ -12,7 +12,7 @@ const { encryptPassword } = require('../utilities/password')
  * representing the row added to the users table.
  */
 const addUser = function(name, email, password, primary_city) {
-  encryptPassword(password).then(hashedPassword => {
+  return encryptPassword(password).then(hashedPassword => {
     const query = `
     INSERT INTO users
       (name, email, password, primary_city)

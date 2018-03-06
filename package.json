@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/LearnersGuild/roam-live-coding#readme",
   "dependencies": {
-    "bcrypt": "^1.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "connect-pg-simple": "^4.2.1",

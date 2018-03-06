@@ -8,11 +8,15 @@
 
 ## Daily Log
 
+### February 6, 2018
+
+- Researched `bcrypt` vs `bcryptjs`; decided on the latter
+
 ### February 2, 2018
 
 - Implemented mocha.opts
 - Researched `--exclude` option for mocha, which was implemented 16 days ago and has not yet been merged: https://github.com/mochajs/mocha/pull/3210
-- Create tests for addUser action (without encrypted password)
+- Create tests and functionality for addUser action (without encrypted password)
 - Start to create and employ password ecryption function
 
 ### February 1, 2018

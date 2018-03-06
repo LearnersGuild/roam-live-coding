@@ -22,10 +22,6 @@ describe('add new user', function() {
   })
   it('adds the encrypted password to the database', () => {
     // should be encrypted password
-    return encryptPassword(password)
-      .then((hashedPassword) => {
-        // TODO
-    })
   })
   it('adds the email to the database', () => {
     expect(newUser.email).to.equal(email)

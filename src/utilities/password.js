@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 /**
  * Create encrypted password
@@ -6,7 +6,9 @@ const bcrypt = require('bcrypt')
  * @returns {promise} - Promise that resolves to encrypted version of password (string) 
  */
 const encryptPassword = function(password) {
-  return bcrypt.hash(password, 10)
+  return bcrypt.genSalt(10)
+    .then((salt) => bcrypt.hash(password, salt)) 
+    .catch(console.error)
 }
 
 const comparePassword = function() {
