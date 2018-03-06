@@ -98,7 +98,7 @@ const seedDb = () => {
       return db.one(createCommentQuery, commentParams)
     })
     .catch(error => {
-      console.error('oopsies', error)
+      console.error(error)
       process.exit(1)
     })
 
