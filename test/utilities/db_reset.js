@@ -37,13 +37,14 @@ const clearDb = function () {
 const seedDb = () => {
   // TODO: when I have a password encryption function, 
   // save encrypted password instead
-  const password = 'plainText'
+  const password = ''
   const city = 'Oakland'
+  const image_url = ''
   const createUserQuery = `
   INSERT INTO users
-    (name, email, password, primary_city)
+    (name, email, password, primary_city, image_url)
   VALUES
-    ($/name/, $/email/, $/password/, $/city/)
+    ($/name/, $/email/, $/password/, $/city/, $/image_url/)
   RETURNING *
   `
   const createCityQuery = `
@@ -72,7 +73,8 @@ const seedDb = () => {
   const userParams = { 
     name: 'Testy Test', 
     email: 'test@test.test',
-    city
+    city,
+    image_url
   }
   let userId
   return encryptPassword(password)
