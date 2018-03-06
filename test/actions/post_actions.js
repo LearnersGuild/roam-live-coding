@@ -125,10 +125,13 @@ describe('updatePostById', function() {
   describe('update all column data', () => {
     let newPostRow
     before('update all columns', () => {
-      return updatePostById(1, newData)
-      .then(result => {
-        newPostRow = result
-      })
+      return resetDb()
+        .then(() => {
+          return updatePostById(1, newData)
+        })
+        .then(result => {
+          newPostRow = result
+        })
     })
     for (let prop in newData) {
       it(`updates the ${prop}`, () => {

@@ -100,9 +100,6 @@ describe('getUserData', function() {
 })
 
 describe('updateUserById', function() {
-  beforeEach('reset and seed the db', () => {
-    return resetDb()
-  })
   const oldData = {
     name: 'Testy Test', 
     email: 'test@test.test',
@@ -120,7 +117,10 @@ describe('updateUserById', function() {
       let newUserRow
       describe(`Updating ${prop}`, () => {
         before('update the column', () => {
-          return updateUserById(1, { [prop]: newData[prop] })
+          return resetDb()
+            .then(() => {
+              return updateUserById(1, { [prop]: newData[prop] })
+            })
             .then(newUser => {
               newUserRow = newUser
           })
@@ -142,7 +142,10 @@ describe('updateUserById', function() {
   describe('update all column data', () => {
     let newUserRow
     before('update all columns', () => {
-      return updateUserById(1, newData)
+      return resetDb()
+      .then(() => {
+        return updateUserById(1, newData)
+      })
       .then(result => {
         newUserRow = result
       })
