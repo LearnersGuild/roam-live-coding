@@ -13,6 +13,11 @@
 - Create file structure
 - Brainstorm actions
   - Decided to create comment actions later
+- Start to fill out file structure for the project
+- `npm init` and `npm install` dependencies
+- Write `db:` npm scripts
+- Discuss `.env` vs shell scripts to create env variables
+  - variables from the latter can be used in `package.json` scripts
 
 ### January 25, 2018
 
