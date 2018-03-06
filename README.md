@@ -12,6 +12,7 @@
 
   - Fix `update*ById` tests so that `beforeEach` doesn't clobber `before`
   - Changed name of `getUserData` and `getPostById` to `getUserDataByEmail` and `getPostDataById` (respectively) for consistency
+  - Started functions and tests for `getPostsByCityId
 
 ### February 23, 2018
 
