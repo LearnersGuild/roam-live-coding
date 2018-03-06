@@ -25,8 +25,8 @@ CREATE TABLE posts ( -- users_cities
 );
 CREATE TABLE comments (
   id SERIAL PRIMARY KEY,
-
   post_id INTEGER NOT NULL REFERENCES posts,
-  user_id INTEGER NOT NULL REFERENCES users
-
+  user_id INTEGER NOT NULL REFERENCES users,
+  body TEXT NOT NULL CHECK (body != ''),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

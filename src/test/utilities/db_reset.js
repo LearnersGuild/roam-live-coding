@@ -16,7 +16,7 @@ const getTables = function () {
  * Truncate all tables to reset the database.
  * @returns {Promise} - Promise whose resolution is unimportant.
  */
-const clearDB = function () {
+const clearDb = function () {
   if (process.env.NODE_ENV === 'production') {
     throw new Error('Cowardly refusing to truncate production db.')
   }
@@ -45,36 +45,71 @@ const seedDb = () => {
     ($/name/, $/email/, $/password/, $/city/)
   RETURNING *
   `
+  const createCityQuery = `
+  INSERT INTO cities
+    (name)
+  VALUES
+    ($/city/)
+  RETURNING *
+  `
+  const createPostQuery = `
+  INSERT INTO posts
+    (city_id, user_id, title, body)
+  VALUES
+    ($/cityId/, $/userId/, $/title/, $/body/)
+  RETURNING *
+  `
+
+  const createCommentQuery = `
+  INSERT INTO comments
+    (post_id, user_id, body)
+  VALUES
+    ($/postId/, $/userId/, $/body/)
+  RETURNING *
+  `
+
   const userParams = { 
     name: 'Testy Test', 
     email: 'test@test.test',
     password,
     city
   }
-  let userId, cityId
+  let userId
   return db.one(createUserQuery, userParams)
     .then(userResult => {
       userId = userResult.id
     })
-    .then(db.one(createCityQuery, cityParams))
+    .then(() => db.one(createCityQuery, { city }))
     .then(cityResult => {
-      cityId = cityResult.id
-      const postParams = {}
+      const postParams = {
+        cityId: cityResult.id,
+        userId,
+        title: 'what a great city!',
+        body: 'go there today!'
+      }
       return db.one(createPostQuery, postParams)
     })
     .then(postResult => {
-      const commentParams = {}
+      const commentParams = {
+        postId: postResult.id,
+        userId,
+        body: 'This comment sucks.'
+      }
       return db.one(createCommentQuery, commentParams)
     })
     .catch(error => {
-      console.error(error)
+      console.error('oopsies', error)
       process.exit(1)
     })
 
 }
 
+/**
+ * Truncate all db tables and seed the db
+ * @returns {promise} - promise whose resolution is unimportant
+ */
 const resetDb = () => {
-
+  return clearDb().then(seedDb)
 }
 
 module.exports = {

@@ -8,7 +8,8 @@
     "db:create": "createdb roam && psql roam < src/data/schema.sql",
     "db:seed": "psql roam < src/data/seed.sql",
     "db:init": "npm run db:drop && npm run db:create && npm run db:seed",
-    "test": "mocha --recursive --exit src/test"
+    "test": "mocha --recursive --exit src/test",
+    "test:db:create": "createdb roam_test && psql roam_test < src/data/schema.sql"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "connect-pg-simple": "^4.2.1",
+    "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
     "eslint": "^4.16.0",
     "express": "^4.16.2",
