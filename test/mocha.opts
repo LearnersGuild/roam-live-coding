@@ -1,0 +1,4 @@
+-r dotenv/config
+--recursive
+--exit
+--exclude "utilities/**"

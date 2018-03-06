@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### February 2, 2018
+
+- Implemented mocha.opts
+- Researched `--exclude` option for mocha, which was implemented 16 days ago and has not yet been merged: https://github.com/mochajs/mocha/pull/3210
+- Create tests for addUser action (without encrypted password)
+
 ### February 1, 2018
 
 - Complete seed function in `db_reset.js`

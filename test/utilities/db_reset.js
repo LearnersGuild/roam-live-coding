@@ -1,4 +1,4 @@
-const db = require('../../db/db')
+const db = require('../../src/db/db')
 
 /**
  * Get all the tables in the current db connection.
