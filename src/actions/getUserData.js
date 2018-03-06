@@ -1,5 +1,6 @@
 const db = require('../db/db')
 const getUserByEmail = require('./getUserByEmail')
+const getPostsByUserId = require('./getPostsByUserId')
 
 /**
  * Get user table data, posts, and cities for user given an email
@@ -11,18 +12,13 @@ const getUserByEmail = require('./getUserByEmail')
  *    primary_city
  *    image_url
  *    posts - value is array containing post data for user
- *    cities - value is array containing data for cities the user has posted about
  * (or null if the user wasn't found)
  */
-const getUserData = (email) => {
-  return Promise.resolve({})
-  // return getUserByEmail(email)
-  //   .then(userData => {
-  //     if (!userData) {
-  //       return null
-  //     }
-
-  //   })
+const getUserData = async (email) => {
+  const userData = await getUserByEmail(email)
+  if (!userData) return null
+  const posts = await getPostsByUserId(userData.id)
+  return Object.assign(userData, { posts })
 }
 
 module.exports = getUserData

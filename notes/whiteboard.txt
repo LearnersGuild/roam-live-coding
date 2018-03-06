@@ -5,12 +5,11 @@
 * think about architecture
     * actions
       * users / auth
-        * create new user
-        * get user data for profile page
-          * incl user data
-          * incl all user posts
-          * incl all cities the user has posted about
-        * check user/password for authentication
+        x* create new user
+        x* get user data for profile page
+          x* incl user data
+          x* incl all user posts
+        x* check user/password for authentication
         * update user (save for later)
       * posts
         * create new post

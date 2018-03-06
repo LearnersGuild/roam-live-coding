@@ -1,45 +1,40 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
-const addUser = require('../../src/actions/addUser')
-const getUserByEmail = require('../../src/actions/getUserByEmail')
-const getUserData = require('../../src/actions/getUserData')
-const { encryptPassword, comparePassword } = require('../../src/utilities/password')
+const addPost = require('../../src/actions/addPost')
+const getPostData = require('../../src/actions/getPostData')
 
-const USER_PROPS = [
-  'email', 
-  'password',
-  'joined_at',
-  'image_url',
-  'primary_city',
-  'id'
+const POST_PROPS = [
+  'id',
+  'city_id',
+  'user_id',
+  'title',
+  'body',
+  'created_at',
 ]
 
-describe('add new user', function() {
-  let newUser
-  const name = 'Joe Schmo'
-  const email = 'joe@schmo.com'
-  const password = 'i<3janeschmo'
-  const primary_city = 'schmotown'
+describe('add new post', function() {
+  let newPost
+  const city_id = 1
+  const user_id = 1
+  const title = 'What a great city'
+  const body = 'I want to move here! live here! be here all the time!'
+
   beforeEach(() => {
     return resetDb()
-    .then(() => addUser(name, email, password, primary_city))
-    .then(user => { newUser = user })
+    .then(() => addPost(city_id, user_id, title, body))
+    .then(user => { newPost = user })
   })
-  it('creates a new userId', () => {
-    expect(newUser.id).to.be.a('number')
+  it('creates a new postId', () => {
+    expect(newPost.id).to.be.a('number')
   })
-  it('adds the name to the database', () => {
-    expect(newUser.name).to.equal(name)
-  })
-  it('adds the correct encrypted password to the database', () => {
-    return comparePassword(password, newUser.password)
-      .then(result => expect(result).to.be.true)
-  })
-  it('adds the email to the database', () => {
-    expect(newUser.email).to.equal(email)
-  })
-  it('adds the primary_city to the database', () => {
-    expect(newUser.primary_city).to.equal(primary_city)
+  ['city_id',
+    'user_id',
+    'title',
+    'body'].forEach(column => {
+    it(`adds the ${column} to the database`, () => {
+      expect(newPost[column]).to.equal(column)
+    })
+  it('has a created_at property', )
   })
 })
 

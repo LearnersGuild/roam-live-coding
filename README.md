@@ -8,7 +8,13 @@
 
 ## Daily Log
 
-### February 14, 2018
+### February 15, 2018
+
+  - Started going faster through back end looking to start react
+  - Introduced async / await
+  - Finished `getUserData`; started `getPostsByUserId`
+
+### February 14, 2018 <3
 
   - Discovered that abstracted property tests function wasn't actually running the tests; un-refactored.
   - Created some tests for `getUserData` -- property set tests and values for some of the properties
