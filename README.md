@@ -2,7 +2,7 @@
 
 [Link to Module](https://curriculum.learnersguild.org/Phases/Practice/Modules/Roam/)
 
-[Link to Github](https://github.com/flyrightsister/roam-live-coding)
+[Link to Github](git@github.com:LearnersGuild/roam-live-coding.git)
 
 ## January 23, 2018
 - Read Module
