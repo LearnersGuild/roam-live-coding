@@ -41,23 +41,17 @@ describe('getUserByEmail', function() {
         .then(() => getUserByEmail('test@test.test'))
         .then(result => userRow = result)
     })
-    it('returns an object with the \'email\' property', () => {
-      expect(userRow).to.have.property('email')
-    })
-    it('returns an object with the \'password\' property', () => {
-      expect(userRow).to.have.property('password')
-    })
-    it('returns an object with the \'joined_at\' property', () => {
-      expect(userRow).to.have.property('joined_at')
-    })
-    it('returns an object with the \'image_url\' property', () => {
-      expect(userRow).to.have.property('image_url')
-    })
-    it('returns an object with the \'primary_city\' property', () => {
-      expect(userRow).to.have.property('primary_city')
-    })
-    it('returns an object with the \'id\' property', () => {
-      expect(userRow).to.have.property('id')
+    Array(
+      'email', 
+      'password',
+      'joined_at',
+      'image_url',
+      'primary_city',
+      'id',
+    ).forEach(prop => {
+      it(`returns an object with the '${prop}' property`, () => {
+        expect(userRow).to.have.property(prop)
+      })
     })
   })
   it('return null when the user does not exist', () => {

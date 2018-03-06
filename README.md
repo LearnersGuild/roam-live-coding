@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### February 13, 2018
+
+  - Refactor property tests to make more DRY
+  - Write tests and code for `getUserData`
+
 ### February 8, 2018
 
   - Discussed possible options for testing `getUserByEmail`:
