@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addPost = require('../../src/actions/addPost')
+const getPostById = require('../../src/actions/getPostById')
 // const getPostData = require('../../src/actions/getPostData')
 
 const POST_PROPS = [
@@ -44,57 +45,57 @@ describe('add new post', function() {
   })
 })
 
-// describe('getUserByEmail', function() {
-//   let userRow
-//   context('user exists', () => {
-//     before('reset the database and retrieve existing user', () => {
-//       return resetDb()
-//         .then(() => getUserByEmail('test@test.test'))
-//         .then(result => userRow = result)
-//     })
-//     POST_PROPS.forEach(prop => {
-//         it(`returns an object with the '${prop}' property`, () => {
-//           expect(userRow).to.have.property(prop)
-//         })
-//   })
-//   it('return null when the user does not exist', () => {
-//     before('reset the db and run getUserData')
-//     return getUserByEmail('doesntexist@nowhere.com')
-//       .then(userRow => {
-//         expect(userRow).to.be.null
-//       })
-//     })
-//   })
-// })
+describe('getPostById', function() {
+  let postRow
+  context('post exists', () => {
+    before('reset the database and retrieve existing post', () => {
+      return resetDb()
+        .then(() => getPostById(1))
+        .then(result => postRow = result)
+    })
+    POST_PROPS.forEach(prop => {
+        it(`returns an object with the '${prop}' property`, () => {
+          expect(postRow).to.have.property(prop)
+        })
+  })
+  it('return null when the post does not exist', () => {
+    before('reset the db and run getpostData')
+    return getPostById(89720348590)
+      .then(postRow => {
+        expect(postRow).to.be.null
+      })
+    })
+  })
+})
 
-// describe('getUserData', function() {
-//   let userData
+// describe('getpostData', function() {
+//   let postData
 //   const extraDataProps = ['posts']
-//   const fullUserProps = USER_PROPS.concat(extraDataProps)
-//   context('user exists', () => {
-//     before('reset the database and retrieve existing user', () => {
+//   const fullpostProps = post_PROPS.concat(extraDataProps)
+//   context('post exists', () => {
+//     before('reset the database and retrieve existing post', () => {
 //       return resetDb()
-//         .then(() => getUserData('test@test.test'))
-//         .then(result => userData = result)
+//         .then(() => getpostData('test@test.test'))
+//         .then(result => postData = result)
 //     })
-//     fullUserProps.forEach(prop => {
+//     fullpostProps.forEach(prop => {
 //       it(`returns an object with the '${prop}' property`, () => {
-//         expect(userData).to.have.property(prop)
+//         expect(postData).to.have.property(prop)
 //       })
 //     })
 //     extraDataProps.forEach(prop => {
 //       it(`returns an array value for the ${prop} property`, () => {
-//         expect(userData[prop]).to.be.an('array')
+//         expect(postData[prop]).to.be.an('array')
 //       })
 //       it(`returns an array of length 1 the ${prop} property`, () => {
-//         expect(userData[prop]).to.have.length(1)
+//         expect(postData[prop]).to.have.length(1)
 //       })
 //     })
 //   })
-//   it('return null when the user does not exist', () => {
-//     return getUserData('doesntexist@nowhere.com')
-//       .then(userData => {
-//         expect(userData).to.be.null
+//   it('return null when the post does not exist', () => {
+//     return getpostData('doesntexist@nowhere.com')
+//       .then(postData => {
+//         expect(postData).to.be.null
 //       })
 //   })
 // })

@@ -1,5 +1,4 @@
 const db = require('../db/db')
-const { encryptPassword } = require('../utilities/password')
 
 /**
  * Add a post to the database
