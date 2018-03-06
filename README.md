@@ -12,6 +12,7 @@
 
   - Complete tests for `getPostsByCityId`
   - Complete tests and functions for `getCityDataById`
+  - Start writing express server (instantiate express)
 
 ### February 27, 2018
 
