@@ -8,10 +8,14 @@
 
 ## Daily Log
 
+### February 22, 2018
+
+  - completed tests for `deletePostById` and *almost* finished function
+
 ### February 21, 2018
 
   - Completed `deletePostById` (including tests). 
-  - Started to write `updatePost` and tests
+  - Started to write `updatePostById` and tests
 
 ### February 16, 2018
 

@@ -4,7 +4,7 @@ const db = require('../../src/db/db')
 const addPost = require('../../src/actions/addPost')
 const getPostById = require('../../src/actions/getPostById')
 const deletePostById = require('../../src/actions/deletePostById')
-const updatePost = require('../../src/actions/updatePost')
+const updatePostById = require('../../src/actions/updatePostById')
 // const getPostData = require('../../src/actions/getPostData')
 
 const POST_PROPS = [
@@ -87,14 +87,38 @@ describe('deletePostById', function() {
     })
 })
 
-describe('updatePost', function() {
+describe.only('updatePostById', function() {
   beforeEach('reset and seed the db', () => {
     return resetDb()
   })
-  it('', () => {
-    return updatePost(1, {})
-      .then(() => {
-
+  const oldData = {
+    title: 'what a great city!',
+    body: 'go there today!'
+  }
+  const newData = {
+    title: 'gooooooo Mira!',
+    body: 'hooray for bodies!',
+  }
+  for (let prop in newData) {
+    let newPostRow
+    describe(`Updating ${prop}`, () => {
+      before('update the column', () => {
+        return updatePostById(1, { [prop]: newData[prop] })
+          .then(newPost => {
+            newPostRow = newPost
+        })
       })
-  })
+      it(`updates the ${prop}`, () => {
+        expect(newPostRow[prop]).to.equal(newData[prop])
+      })
+      for (let otherProp in newData) {
+        // make sure none of the other properties changed
+        if (otherProp !== prop) {
+          it(`does NOT update the ${otherProp}`, () => {
+            expect(newPostRow[otherProp]).to.equal(oldData[otherProp])
+          })
+        }
+      }
+    })
+  }
 })
