@@ -1,0 +1,8 @@
+cookie-session
+  * simpler
+  * pablo tells us to use it
+
+express-session
+  * more complicated on the outset
+  * can store in db (or places other than memory)
+  * easier to work with passport (according to James)
