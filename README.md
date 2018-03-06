@@ -8,6 +8,14 @@
 
 ## Daily Log
 
+### February 8, 2018
+
+  - Discussed possible options for testing `getUserByEmail`:
+    - Test for existence of each property individually
+    - Create an object that represents all expected properties and values and do a "deep equal"
+    - Create a set of properties, and a set of expected properties, and compare. 
+  - Decided on (and coded) option 1
+
 ### February 6, 2018
 
 #### Part I (9:15 - 10:00)
