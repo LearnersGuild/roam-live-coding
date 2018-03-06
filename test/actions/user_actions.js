@@ -3,6 +3,7 @@ const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
 const getUserByEmail = require('../../src/actions/getUserByEmail')
 const getUserData = require('../../src/actions/getUserData')
+const updateUserById = require('../../src/actions/updateUserById')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
 
 const USER_PROPS = [
@@ -95,5 +96,61 @@ describe('getUserData', function() {
       .then(userData => {
         expect(userData).to.be.null
       })
+  })
+})
+
+describe('updateUserById', function() {
+  beforeEach('reset and seed the db', () => {
+    return resetDb()
+  })
+  const oldData = {
+    name: 'Testy Test', 
+    email: 'test@test.test',
+    primary_city: 'Oakland',
+    image_url: ''
+  }
+  const newData = {
+    name: 'Cheerful Test', 
+    email: 'cheerful@test.test',
+    primary_city: 'Berkeley',
+    image_url: 'http://myuglyface.com'
+  }
+  describe('update column data one-by-one', () => {
+    for (let prop in newData) {
+      let newUserRow
+      describe(`Updating ${prop}`, () => {
+        before('update the column', () => {
+          return updateUserById(1, { [prop]: newData[prop] })
+            .then(newUser => {
+              newUserRow = newUser
+          })
+        })
+        it(`updates the ${prop}`, () => {
+          expect(newUserRow[prop]).to.equal(newData[prop])
+        })
+        for (let otherProp in newData) {
+          // make sure none of the other properties changed
+          if (otherProp !== prop) {
+            it(`does NOT update the ${otherProp}`, () => {
+              expect(newUserRow[otherProp]).to.equal(oldData[otherProp])
+            })
+          }
+        }
+      })
+    }
+  })
+  describe('update all column data', () => {
+    let newUserRow
+    before('update all columns', () => {
+      return updateUserById(1, newData)
+      .then(result => {
+        newUserRow = result
+      })
+    })
+    for (let prop in newData) {
+      it(`updates the ${prop}`, () => {
+        expect(newUserRow[prop]).to.equal(newData[prop])
+      })
+    }
   })
 })

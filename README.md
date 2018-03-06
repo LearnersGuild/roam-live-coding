@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### February 23, 2018
+
+  - Complete `updatePostById` function
+  - Write tests and functions for `updateUserById`
+  - Learn that mocha runs all the `beforeEach` functions *after* the `before` functions, which caused problems with our tests
+
 ### February 22, 2018
 
   - completed tests for `updatePostById` and *almost* finished function
