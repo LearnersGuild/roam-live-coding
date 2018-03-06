@@ -6,5 +6,8 @@ const db = require('../db/db')
  * @returns {promise} - Promise whose resolution is unimportant
  */
 const deletePostById = (id) => {
-  return Promise.resolve({})
+  const query = `DELETE FROM posts WHERE id=$1`
+  return db.none(query, [id])
 }
+
+module.exports = deletePostById

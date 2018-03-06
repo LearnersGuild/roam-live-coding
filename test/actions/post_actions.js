@@ -1,7 +1,10 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
+const db = require('../../src/db/db')
 const addPost = require('../../src/actions/addPost')
 const getPostById = require('../../src/actions/getPostById')
+const deletePostById = require('../../src/actions/deletePostById')
+const updatePost = require('../../src/actions/updatePost')
 // const getPostData = require('../../src/actions/getPostData')
 
 const POST_PROPS = [
@@ -22,7 +25,7 @@ describe('add new post', function() {
     'body': 'I want to move here! live here! be here all the time!',
   }
 
-  beforeEach(('reset the db and add a post') => {
+  beforeEach('reset the db and add a post', () => {
     return resetDb()
     .then(() => addPost(postData.city_id, postData.user_id, postData.title, postData.body))
     .then(post => { newPost = post })
@@ -67,14 +70,31 @@ describe('getPostById', function() {
   })
 })
 
-describe(' ', function() {
+describe('deletePostById', function() {
   let postCountBefore
+  const countQuery = 'SELECT COUNT(id) FROM posts'
   beforeEach('reset and seed the db', () => {
-    resetDb()
-      .then(() => {
-        db.one(`SELECT COUNT(id) FROM posts`)
-      })
-      .then(count => postCountBefore = count)
+    return resetDb()
+      .then(() => db.one(countQuery))
+      .then(countResult => postCountBefore = countResult.count)
   })
-  it('deletes the post from the database')
+  it('deletes the post from the database', () => {
+    return deletePostById(1)
+      .then(() => db.one(countQuery))
+      .then(countResult => {
+        expect(Number(countResult.count)).to.equal(postCountBefore - 1)
+      })
+    })
+})
+
+describe('updatePost', function() {
+  beforeEach('reset and seed the db', () => {
+    return resetDb()
+  })
+  it('', () => {
+    return updatePost(1, {})
+      .then(() => {
+
+      })
+  })
 })

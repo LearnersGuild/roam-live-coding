@@ -12,10 +12,10 @@
         x* check user/password for authentication
         * update user (save for later)
       * posts
-        * create new post
-        * read post
+        x* create new post
+        x* read post
         * update post
-        * delete post
+        x* delete post
       * comments
         * later
       * cities

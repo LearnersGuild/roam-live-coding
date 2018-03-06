@@ -5,6 +5,7 @@ const connectionString =
     ? process.env.TEST_DB_URL
     : process.env.DB_URL
 
+// const connectionString = 'postgres:///roam'
 const db = pgp(connectionString)
 
 module.exports = db
