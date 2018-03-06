@@ -1,4 +1,5 @@
 const db = require('../db/db')
+const { encryptPassword } = require('../utilities/password')
 
 /**
  * Add a user to the database
@@ -11,13 +12,15 @@ const db = require('../db/db')
  * representing the row added to the users table.
  */
 const addUser = function(name, email, password, primary_city) {
-  const query = `
-  INSERT INTO users
-    (name, email, password, primary_city)
-  VALUES
-    ($1, $2, $3, $4)
-  RETURNING *` 
-  return db.one(query, [name, email, password, primary_city])
+  encryptPassword(password).then(hashedPassword => {
+    const query = `
+    INSERT INTO users
+      (name, email, password, primary_city)
+    VALUES
+      ($1, $2, $3, $4)
+    RETURNING *` 
+    return db.one(query, [name, email, hashedPassword, primary_city])
+  })
 }
 
 module.exports = addUser
