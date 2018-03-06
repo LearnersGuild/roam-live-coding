@@ -1,0 +1,38 @@
+{
+  "name": "roam-live-code",
+  "version": "1.0.0",
+  "description": "## Links",
+  "main": "index.js",
+  "scripts": {
+    "db:drop": "dropdb --if-exists roam",
+    "db:create": "createdb roam && psql roam < src/data/schema.sql",
+    "db:seed": "psql roam < src/data/seed.sql",
+    "db:init": "npm run db:drop && npm run db:create && npm run db:seed",
+    "test": "mocha --recursive --exit src/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LearnersGuild/roam-live-coding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LearnersGuild/roam-live-coding/issues"
+  },
+  "homepage": "https://github.com/LearnersGuild/roam-live-coding#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "connect-pg-simple": "^4.2.1",
+    "ejs": "^2.5.7",
+    "eslint": "^4.16.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mocha": "^5.0.0",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.11",
+    "passport": "^0.4.0",
+    "pg-promise": "^7.4.1"
+  }
+}

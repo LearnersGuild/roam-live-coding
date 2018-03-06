@@ -53,7 +53,7 @@
     * dependencies
       * express
       * pg-promise
-      * bodyParser
+      * body-parser
       * nodemon
       * bcrypt
       * mocha / chai
