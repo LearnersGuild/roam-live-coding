@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### February 1, 2018
+
+- Complete seed function in `db_reset.js`
+- Research best way to use `dotenv` with multiple test files
+- Start to implement `mocha.opts`
+
 ### January 31, 2018
 
 - Create `db.js` file
