@@ -8,6 +8,8 @@
 
 ## Daily Log
 
+### February 16, 2018
+
 ### February 15, 2018
 
   - Started going faster through back end looking to start react

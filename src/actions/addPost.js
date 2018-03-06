@@ -2,25 +2,25 @@ const db = require('../db/db')
 const { encryptPassword } = require('../utilities/password')
 
 /**
- * Add a user to the database
+ * Add a post to the database
  * 
- * @param {string} name 
- * @param {string} email 
- * @param {string} password 
- * @param {string} primary_city 
+ * @param {number} city_id 
+ * @param {number} user_id 
+ * @param {string} title 
+ * @param {string} body 
  * @returns {promise} - Promise that resolves to an object 
- * representing the row added to the users table.
+ * representing the row added to the posts table.
  */
-const addUser = function(name, email, password, primary_city) {
-  return encryptPassword(password).then(hashedPassword => {
-    const query = `
-    INSERT INTO users
-      (name, email, password, primary_city)
+const addPost = function(city_id, user_id, title, body) {
+  const query = `
+    INSERT INTO posts
+      (city_id, user_id, title, body)
     VALUES
-      ($1, $2, $3, $4)
-    RETURNING *` 
-    return db.one(query, [name, email, hashedPassword, primary_city])
-  })
+      ($/city_id/, $/user_id/, $/title/, $/body/)
+    RETURNING
+      *
+  `
+  return db.one(query, { city_id, user_id, title, body })
 }
 
-module.exports = addUser
+module.exports = addPost
