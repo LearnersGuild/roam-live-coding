@@ -1,4 +1,5 @@
 const db = require('../../src/db/db')
+const { encryptPassword } = require('../../src/utilities/password')
 
 /**
  * Get all the tables in the current db connection.
@@ -71,14 +72,17 @@ const seedDb = () => {
   const userParams = { 
     name: 'Testy Test', 
     email: 'test@test.test',
-    password,
     city
   }
   let userId
-  return db.one(createUserQuery, userParams)
-    .then(userResult => {
-      userId = userResult.id
-    })
+  return encryptPassword(password)
+    .then(hashedPassword => {
+      userParams.password = hashedPassword
+      return db.one(createUserQuery, userParams)
+        .then(userResult => {
+          userId = userResult.id
+        })
+      })
     .then(() => db.one(createCityQuery, { city }))
     .then(cityResult => {
       const postParams = {

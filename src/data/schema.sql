@@ -4,7 +4,7 @@ CREATE TABLE users (
   email TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL,
   joined_at DATE DEFAULT CURRENT_DATE,
-  user_image_url TEXT,
+  image_url TEXT,
   primary_city TEXT NOT NULL
 );
 CREATE TABLE cities (

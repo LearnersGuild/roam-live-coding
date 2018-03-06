@@ -10,7 +10,7 @@
           * incl all user posts
           * incl all cities the user has posted about
         * check user/password for authentication
-        * update user
+        * update user (save for later)
       * posts
         * create new post
         * read post

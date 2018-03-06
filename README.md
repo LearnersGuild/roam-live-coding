@@ -10,9 +10,21 @@
 
 ### February 6, 2018
 
-- Researched `bcrypt` vs `bcryptjs`; decided on the latter
-- Completed `encryptPassword` and `comparePassword` functions in `password.js`
-- Added test to check that password was encrypted properly 
+#### Part I (9:15 - 10:00)
+  - Researched `bcrypt` vs `bcryptjs`; decided on the latter
+  - Completed `encryptPassword` and `comparePassword` functions in `password.js`
+  - Added test to check that password was encrypted properly 
+  - Discussed testing functions that return promises (and how easy it is to get false positives)
+
+#### Part II (10:15 - 12:00)
+  - harped on using JSDoc
+  - Started to create getUserData, realized we needed getUserByEmail
+  - refused to use chai includes despite Kelcey's best efforts
+  - WIP: created tests for getUserByEmail
+    - got stuck on comparing the object returned by the success case
+    - will resume tomorrow by doing deepEqual using known userRow
+      - this will involve giving user fixed "joined_at" data
+      - export user data from db_reset so code is DRY and there's less chance for discrepancies
 
 ### February 2, 2018
 

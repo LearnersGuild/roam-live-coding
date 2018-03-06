@@ -1,7 +1,8 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
-const { comparePassword } = require('../../src/utilities/password')
+const getUserByEmail = require('../../src/actions/getUserByEmail')
+const { encryptPassword, comparePassword } = require('../../src/utilities/password')
 
 describe('add new user', function() {
   let newUser
@@ -29,5 +30,28 @@ describe('add new user', function() {
   })
   it('adds the primary_city to the database', () => {
     expect(newUser.primary_city).to.equal(primary_city)
+  })
+})
+
+describe('getUserByEmail', function() {
+  beforeEach('reset the database', resetDb)
+  it('returns an object with the expected properties when the user exists', () => {
+    // TODO: object deep equal based on seed data
+    getUserByEmail('test@test.test')
+      .then(userRow => {
+        expect(userRow).to.have.property('email')
+          .and.to.have.property('password')
+          .and.to.have.property('joined_at')
+          .and.to.have.property('name')
+          .and.to.have.property('id')
+          .and.to.have.property('primary_city')
+          .and.to.have.property('image_url')
+      })
+  })
+  it('return null when the user does not exist', () => {
+    return getUserByEmail('fake@notanemail.doesntexist')
+      .then(userRow => {
+        expect(userRow).to.be.null
+      })
   })
 })
