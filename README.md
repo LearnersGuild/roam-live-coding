@@ -8,6 +8,13 @@
 
 ## Daily Log
 
+### January 24, 2018
+- Complete lists of views and routes
+- List and decide on express modules
+  - Research/discuss `cookie-session` vs. `express-session` vs. `client-sessions`
+  - Research/discuss `passport` and `bcrypt`
+- Start data modeling
+
 ### January 23, 2018
 - Read Module
 - Create git repo and github repo

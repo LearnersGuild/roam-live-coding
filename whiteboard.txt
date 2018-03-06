@@ -4,19 +4,44 @@
 
 * think about architecture
     * routes
-        * GET serve signup / login
-        * POST process signup / login
-        * serve user profile page
-        * serve existing post
+        * GET `/authentication` serve signup / login
+        * POST `/authentication/login` process login
+        * POST `/authentication/signup` process signup
+        * GET `/users/:id` serve user profile page
+        * PUT `/users/:id` edit user profile (AJAX)
+        * GET `/posts/:id` serve existing post (and its comments)
+        * PUT `/posts/:id` update existing post (AJAX)
+        * DELETE `/posts/:id` delete existing post (AJAX)
+        * GET `/posts/new` serve post form
+        * POST `/posts/new` process new post
+        * GET `/cities/:id` serve city detail
     * views
         * header (template partial)
         * sign up / login
         * user profile page
+          * allow edit
         * view existing post
+          * allow edit
+          * allow delete (with pop-up)
         * create new post
-    * apis
+        * view city detail
+    * third-party apis (front-end)
+      * google places ("iconic picture of city")
+      * google maps API
     * file structure
     * dependencies
+      * express
+      * pg-promise
+      * bodyParser
+      * nodemon
+      * bcrypt
+      * mocha / chai
+      * ejs
+      * express-session
+      * connect-pg-simple (for storing sessions in db)
+      * passport (for authentication)
+      * morgan
+      * eslint
 
 * write down business logic
     * user stories
