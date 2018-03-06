@@ -6,8 +6,14 @@
     * routes
         * GET serve signup / login
         * POST process signup / login
+        * serve user profile page
+        * serve existing post
     * views
+        * header (template partial)
         * sign up / login
+        * user profile page
+        * view existing post
+        * create new post
     * apis
     * file structure
     * dependencies
