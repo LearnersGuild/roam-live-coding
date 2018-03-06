@@ -15,11 +15,10 @@ const getPostsByCityId = require('./getPostsByCityId')
  * (or null if the city wasn't found)
  */
 const getCityDataById = async (id) => {
-  return Promise.resolve({})
-  // const userData = await getUserByEmail(email)
-  // if (!userData) return null
-  // const posts = await getPostsByUserId(userData.id)
-  // return Object.assign(userData, { posts })
+  const cityData = await db.oneOrNone(`SELECT * FROM cities WHERE id=$1`, [id])
+  if (!cityData) return null
+  const posts = await getPostsByCityId(cityData.id)
+  return Object.assign(cityData, { posts })
 }
 
 module.exports = getCityDataById

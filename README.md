@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### March 1, 2018
+
+  - Complete tests for `getPostsByCityId`
+  - Complete tests and functions for `getCityDataById`
+
 ### February 27, 2018
 
   - Fix `update*ById` tests so that `beforeEach` doesn't clobber `before`
