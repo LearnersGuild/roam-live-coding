@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
 const getUserByEmail = require('../../src/actions/getUserByEmail')
-const getUserData = require('../../src/actions/getUserData')
+const getUserDataByEmail = require('../../src/actions/getUserDataByEmail')
 const updateUserById = require('../../src/actions/updateUserById')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
 
@@ -58,7 +58,7 @@ describe('getUserByEmail', function() {
         })
   })
   it('return null when the user does not exist', () => {
-    before('reset the db and run getUserData')
+    before('reset the db and run getUserDataByEmail')
     return getUserByEmail('doesntexist@nowhere.com')
       .then(userRow => {
         expect(userRow).to.be.null
@@ -67,14 +67,14 @@ describe('getUserByEmail', function() {
   })
 })
 
-describe('getUserData', function() {
+describe('getUserDataByEmail', function() {
   let userData
   const extraDataProps = ['posts']
   const fullUserProps = USER_PROPS.concat(extraDataProps)
   context('user exists', () => {
     before('reset the database and retrieve existing user', () => {
       return resetDb()
-        .then(() => getUserData('test@test.test'))
+        .then(() => getUserDataByEmail('test@test.test'))
         .then(result => userData = result)
     })
     fullUserProps.forEach(prop => {
@@ -92,7 +92,7 @@ describe('getUserData', function() {
     })
   })
   it('return null when the user does not exist', () => {
-    return getUserData('doesntexist@nowhere.com')
+    return getUserDataByEmail('doesntexist@nowhere.com')
       .then(userData => {
         expect(userData).to.be.null
       })

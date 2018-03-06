@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const db = require('../../src/db/db')
 const addPost = require('../../src/actions/addPost')
-const getPostById = require('../../src/actions/getPostById')
+const getPostDataById = require('../../src/actions/getPostDataById')
 const deletePostById = require('../../src/actions/deletePostById')
 const updatePostById = require('../../src/actions/updatePostById')
 
@@ -47,12 +47,12 @@ const POST_PROPS = [
 //   })
 // })
 
-// describe('getPostById', function() {
+// describe('getPostDataById', function() {
 //   let postRow
 //   context('post exists', () => {
 //     before('reset the database and retrieve existing post', () => {
 //       return resetDb()
-//         .then(() => getPostById(1))
+//         .then(() => getPostDataById(1))
 //         .then(result => postRow = result)
 //     })
 //     POST_PROPS.forEach(prop => {
@@ -61,7 +61,7 @@ const POST_PROPS = [
 //         })
 //   })
 //   it('return null when the post does not exist', () => {
-//     return getPostById(89720348590)
+//     return getPostDataById(89720348590)
 //       .then(postRow => {
 //         expect(postRow).to.be.null
 //       })

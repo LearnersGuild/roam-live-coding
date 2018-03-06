@@ -4,24 +4,24 @@
 
 * think about architecture
     * actions
-      * users / auth
+      x* users / auth
         x* create new user
         x* get user data for profile page
           x* incl user data
           x* incl all user posts
         x* check user/password for authentication
-        * update user (save for later)
-      * posts
+        x* update user (save for later)
+      x* posts
         x* create new post
         x* read post
-        * update post
+        x* update post
         x* delete post
       * comments
         * later
       * cities
         * get city information
           * incl all posts
-        * get list of cities
+        * get list of cities -- stretch!
 
 
     * routes

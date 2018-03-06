@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### February 27, 2018
+
+  - Fix `update*ById` tests so that `beforeEach` doesn't clobber `before`
+  - Changed name of `getUserData` and `getPostById` to `getUserDataByEmail` and `getPostDataById` (respectively) for consistency
+
 ### February 23, 2018
 
   - Complete `updatePostById` function

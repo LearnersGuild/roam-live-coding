@@ -5,7 +5,7 @@ const db = require('../db/db')
  * @param {number} id - id of post for which to get data
  * @returns {promise} - Promise resolving to an object representing a post row
  */
-const getPostById = (id) => {
+const getPostDataById = (id) => {
   const query = `
     SELECT * FROM posts
     WHERE id = $1
@@ -13,4 +13,4 @@ const getPostById = (id) => {
   return db.oneOrNone(query, [id])
 }
 
-module.exports = getPostById
+module.exports = getPostDataById
