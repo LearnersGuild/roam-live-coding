@@ -11,8 +11,14 @@ const encryptPassword = function(password) {
     .catch(console.error)
 }
 
-const comparePassword = function() {
-
+/**
+ * 
+ * @param {string} rawPassword - password entered by user
+ * @param {string} hashedPassword - password retrieved from database
+ * @returns {promise} - Promise resolving to boolean (whether password matched)
+ */
+const comparePassword = function(rawPassword, hashedPassword) {
+  return bcrypt.compare(rawPassword, hashedPassword)
 }
 
 module.exports = {

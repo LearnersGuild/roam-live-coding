@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
-const encryptPassword = require('../../src/utilities/password')
+const { comparePassword } = require('../../src/utilities/password')
 
 describe('add new user', function() {
   let newUser
@@ -20,8 +20,9 @@ describe('add new user', function() {
   it('adds the name to the database', () => {
     expect(newUser.name).to.equal(name)
   })
-  it('adds the encrypted password to the database', () => {
-    // should be encrypted password
+  it('adds the correct encrypted password to the database', () => {
+    return comparePassword(password, newUser.password)
+      .then(result => expect(result).to.be.true)
   })
   it('adds the email to the database', () => {
     expect(newUser.email).to.equal(email)

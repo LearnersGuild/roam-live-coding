@@ -11,6 +11,8 @@
 ### February 6, 2018
 
 - Researched `bcrypt` vs `bcryptjs`; decided on the latter
+- Completed `encryptPassword` and `comparePassword` functions in `password.js`
+- Added test to check that password was encrypted properly 
 
 ### February 2, 2018
 
