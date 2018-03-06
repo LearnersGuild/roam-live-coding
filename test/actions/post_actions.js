@@ -67,7 +67,7 @@ describe('getPostById', function() {
   })
 })
 
-describe('deletePostById', function() {
+describe(' ', function() {
   let postCountBefore
   beforeEach('reset and seed the db', () => {
     resetDb()

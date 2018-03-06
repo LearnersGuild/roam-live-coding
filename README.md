@@ -10,6 +10,9 @@
 
 ### February 16, 2018
 
+  - Completed `getPostById` (including tests). 
+  - Started to write `deletePostById` and tests
+
 ### February 15, 2018
 
   - Started going faster through back end looking to start react
