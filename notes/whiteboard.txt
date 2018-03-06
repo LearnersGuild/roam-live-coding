@@ -3,6 +3,27 @@
     * functions
 
 * think about architecture
+    * actions
+      * users / auth
+        * create new user
+        * get user data for profile page
+          * incl all user posts
+          * incl all cities the user has posted about
+        * check user/password for authentication
+        * update user
+      * posts
+        * create new post
+        * read post
+        * update post
+        * delete post
+      * comments
+        * later
+      * cities
+        * get city information
+          * incl all posts
+        * get list of cities
+
+
     * routes
         * GET `/authentication` serve signup / login
         * POST `/authentication/login` process login

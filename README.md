@@ -8,13 +8,19 @@
 
 ## Daily Log
 
+### January 30, 2018
+
+- Create file structure
+- Brainstorm actions
+  - Decided to create comment actions later
+
 ### January 25, 2018
 
 - More data modeling
   - Decided to let user enter arbitrary string for primary city, rather than associating it with a city id in the cities table.
   - Discussed TEXT vs. VARCHAR (see [this article](https://www.depesz.com/2010/03/02/charx-vs-varcharx-vs-varchar-vs-text/))
   - Discussed how to disallow empty string
-  
+
 ### January 24, 2018
 - Complete lists of views and routes
 - List and decide on express modules
