@@ -8,6 +8,10 @@
 
 ## Daily Log
 
+### March 6, 2018
+
+  - Added routes files and test files
+
 ### March 1, 2018
 
   - Complete tests for `getPostsByCityId`

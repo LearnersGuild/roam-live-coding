@@ -3,16 +3,7 @@ const { resetDb } = require('../utilities/db_reset')
 const db = require('../../src/db/db')
 const getCityDataById = require('../../src/actions/getCityDataById')
 const getPostsByCityId = require('../../src/actions/getPostsByCityId')
-
-const CITY_PROPS = [
-  'id',
-  'name',
-  'latitude',
-  'longitude',
-  'image_url',
-  'description',
-  'posts',
-]
+const { CITY_PROPS } = require('../utilities/properties')
 
 describe('getCityDataById', () => {
   context('city exists in the db', () => {

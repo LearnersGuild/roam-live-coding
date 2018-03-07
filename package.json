@@ -36,5 +36,8 @@
     "nodemon": "^1.14.11",
     "passport": "^0.4.0",
     "pg-promise": "^7.4.1"
+  },
+  "devDependencies": {
+    "chai-http": "^3.0.0"
   }
 }
