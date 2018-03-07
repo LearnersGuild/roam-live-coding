@@ -18,9 +18,9 @@
         x* delete post
       * comments
         * later
-      * cities
-        * get city information
-          * incl all posts
+      x* cities
+        x* get city information
+          x* incl all posts
         * get list of cities -- stretch!
 
 
