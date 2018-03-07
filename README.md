@@ -11,6 +11,7 @@
 ### March 6, 2018
 
   - Added routes files and test files
+  - Created tests and functionality for `/cities/:id` route
 
 ### March 1, 2018
 
