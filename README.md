@@ -8,10 +8,15 @@
 
 ## Daily Log
 
+### March 12, 2018
+
+  - Merged Dev's changes from Thursday
+  - Started PUT `/users/:id` route and tests
+
 ### March 8, 2018
 
   - Changed `getUser*ByEmail` to `getUser*ById`
-  - Implemented `/users/:id` route and tests
+  - Implemented GET `/users/:id` route and tests
 
 ### March 6, 2018
 
