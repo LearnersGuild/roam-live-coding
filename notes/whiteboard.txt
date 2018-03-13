@@ -28,14 +28,14 @@
         * GET `/authentication` serve signup / login
         * POST `/authentication/login` process login
         * POST `/authentication/signup` process signup
-        * GET `/users/:id` serve user profile page
-        * PUT `/users/:id` edit user profile (AJAX)
+        x* GET `/users/:id` serve user profile page
+        x* PUT `/users/:id` edit user profile (AJAX)
         * GET `/posts/:id` serve existing post (and its comments)
         * PUT `/posts/:id` update existing post (AJAX)
         * DELETE `/posts/:id` delete existing post (AJAX)
         * GET `/posts/new` serve post form
         * POST `/posts/new` process new post
-        * GET `/cities/:id` serve city detail
+        x* GET `/cities/:id` serve city detail
     * views
         * header (template partial)
         * sign up / login

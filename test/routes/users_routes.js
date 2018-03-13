@@ -21,8 +21,8 @@ describe('User Failure Route', () =>
   )
 )
 
-describe.only('User Success Route', () => {
-  before('Before are test', () => resetDb()
+describe('User Success Route', () => {
+  before('Reset the DB and add user', () => resetDb()
     .then(() => addUser(name, email, password, primary_city))
     .then(user => (this.createdUser = user))
   )
@@ -37,3 +37,31 @@ describe.only('User Success Route', () => {
     expect(this.returnUser.name).to.be.eql(this.createdUser.name)
   )
 })
+
+describe.only('PUT /users/:id', () => {
+  context('User does not exist', () => {
+    before('Reset DB and access route with nonexistent user', () => {
+      return resetDb()
+        .then(() => {
+          chai.request(app)
+            .put('/users/23456')
+            .send({ name: 'Bugs Bunny' })
+        })
+        .then(response => {
+          console.log('************ response:::', response)
+
+        })
+        .catch(err => { 
+          console.log('************ err:::', err)
+          this.errResponse = err.response 
+        })
+      })
+    it('returns status 422', () => {
+      expect(this.errResponse).to.have.status(422)
+    })
+    it('returns json with error message', () => {
+      expect(this.errResponse.body.message).to.include('Invalid user ID')
+    })
+  })
+})
+

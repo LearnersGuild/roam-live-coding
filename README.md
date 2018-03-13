@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### March 8, 2018
+
+  - Changed `getUser*ByEmail` to `getUser*ById`
+  - Implemented `/users/:id` route and tests
+
 ### March 6, 2018
 
   - Added routes files and test files

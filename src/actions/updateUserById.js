@@ -1,9 +1,9 @@
 const db = require('../db/db')
 
 /**
- * Update a user in the database
+ * Update a user in the database.
  * 
- * @param {number} id - ID of user to update
+ * @param {number} id - ID of user to update.
  * @param {object} newData - possible keys: 
  *                              name
  *                              email
@@ -11,6 +11,8 @@ const db = require('../db/db')
  *                              primary_city
  * @returns {promise} - Promise that resolves to an object 
  * representing the updated row in the users table.
+ * 
+ *   -> Will resolve to null if user does not exist
  */
 const updateUserById = function(id, newData) {
   let query = 'UPDATE users SET\n'
@@ -23,7 +25,7 @@ const updateUserById = function(id, newData) {
     WHERE id = $/id/
     RETURNING *
   `
-  return db.one(query, Object.assign(newData, {id}))
+  return db.oneOrNone(query, Object.assign(newData, {id}))
 }
 
 module.exports = updateUserById
