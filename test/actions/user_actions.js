@@ -1,8 +1,8 @@
 const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
-const getUserByEmail = require('../../src/actions/getUserByEmail')
-const getUserDataByEmail = require('../../src/actions/getUserDataByEmail')
+const getUserById = require('../../src/actions/getUserById')
+const getUserDataById = require('../../src/actions/getUserDataById')
 const updateUserById = require('../../src/actions/updateUserById')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
 
@@ -44,12 +44,12 @@ describe('add new user', function() {
   })
 })
 
-describe('getUserByEmail', function() {
+describe('getUserById', function() {
   let userRow
   context('user exists', () => {
     before('reset the database and retrieve existing user', () => {
       return resetDb()
-        .then(() => getUserByEmail('test@test.test'))
+        .then(() => getUserById(1))
         .then(result => userRow = result)
     })
     USER_PROPS.forEach(prop => {
@@ -58,8 +58,8 @@ describe('getUserByEmail', function() {
         })
   })
   it('return null when the user does not exist', () => {
-    before('reset the db and run getUserDataByEmail')
-    return getUserByEmail('doesntexist@nowhere.com')
+    before('reset the db and run getUserDataById')
+    return getUserById(2)
       .then(userRow => {
         expect(userRow).to.be.null
       })
@@ -67,14 +67,14 @@ describe('getUserByEmail', function() {
   })
 })
 
-describe('getUserDataByEmail', function() {
+describe('getUserDataById', function() {
   let userData
   const extraDataProps = ['posts']
   const fullUserProps = USER_PROPS.concat(extraDataProps)
   context('user exists', () => {
     before('reset the database and retrieve existing user', () => {
       return resetDb()
-        .then(() => getUserDataByEmail('test@test.test'))
+        .then(() => getUserDataById(1))
         .then(result => userData = result)
     })
     fullUserProps.forEach(prop => {
@@ -92,7 +92,7 @@ describe('getUserDataByEmail', function() {
     })
   })
   it('return null when the user does not exist', () => {
-    return getUserDataByEmail('doesntexist@nowhere.com')
+    return getUserDataById(2)
       .then(userData => {
         expect(userData).to.be.null
       })

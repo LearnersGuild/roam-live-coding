@@ -5,12 +5,12 @@ const db = require('../db/db')
  * @param {string} email - email of user for whom to get data
  * @returns {promise} - Promise resolving to an object representing a user row
  */
-const getUserByEmail = (email) => {
+const getUserById = id => {
   const query = `
   SELECT * FROM users
-  WHERE email=$1
+  WHERE id=$1
   `
-  return db.oneOrNone(query, [email])
+  return db.oneOrNone(query, [id])
 }
 
-module.exports = getUserByEmail
+module.exports = getUserById
