@@ -1,5 +1,5 @@
 const db = require('../db/db')
-const getUserByEmail = require('./getUserByEmail')
+const getUserById = require('./getUserById')
 const getPostsByUserId = require('./getPostsByUserId')
 
 /**
@@ -14,11 +14,11 @@ const getPostsByUserId = require('./getPostsByUserId')
  *    posts - value is array containing post data for user
  * (or null if the user wasn't found)
  */
-const getUserDataByEmail = async (email) => {
-  const userData = await getUserByEmail(email)
+const getUserDataById = async id => {
+  const userData = await getUserById(id)
   if (!userData) return null
   const posts = await getPostsByUserId(userData.id)
   return Object.assign(userData, { posts })
 }
 
-module.exports = getUserDataByEmail
+module.exports = getUserDataById
