@@ -38,21 +38,16 @@ describe('User Success Route', () => {
   )
 })
 
-describe.only('PUT /users/:id', () => {
+describe('patch /users/:id', () => {
   context('User does not exist', () => {
     before('Reset DB and access route with nonexistent user', () => {
       return resetDb()
         .then(() => {
-          chai.request(app)
-            .put('/users/23456')
+          return chai.request(app)
+            .patch('/users/23456')
             .send({ name: 'Bugs Bunny' })
         })
-        .then(response => {
-          console.log('************ response:::', response)
-
-        })
         .catch(err => { 
-          console.log('************ err:::', err)
           this.errResponse = err.response 
         })
       })
@@ -61,6 +56,46 @@ describe.only('PUT /users/:id', () => {
     })
     it('returns json with error message', () => {
       expect(this.errResponse.body.message).to.include('Invalid user ID')
+    })
+  })
+  context('User does exist', () => {
+    context('no data sent', () => {
+      before('Reset DB and access route with existent user', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .patch('/users/1')
+              .send({})
+          })
+          .catch(err => { 
+            this.errResponse = err.response 
+          })
+        })
+      it('returns status 422', () => {
+        expect(this.errResponse).to.have.status(422)
+      })
+      it('returns json with error message', () => {
+        expect(this.errResponse.body.message).to.equal('No changes received')
+      })
+    })
+    context('data sent', () => {
+      before('Reset DB and access route with existent user and data', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .patch('/users/1')
+              .send({
+                name: 'Harry Potter',
+                email: 'hpotter@ministryofmagic.gov.uk',
+              })
+          })
+          .then(response => {
+            this.response = response
+          })
+        })
+      it('returns response 200', () => {
+        expect(this.response.status).to.equal(200)
+      })
     })
   })
 })

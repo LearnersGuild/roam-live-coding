@@ -26,26 +26,25 @@ userRouter.get('/:id', (req, res) => {
     image_url
     primary_city
 */
-userRouter.put('/:id', (req, res) => {
+userRouter.patch('/:id', (req, res) => {
   // TODO: make sure the request is for the AUTHENTICATED user
   const { id } = req.params
-  console.log('************ id:::', id)
   const changes = req.body
-  console.log('************ changes:::', changes)
 
   if (!changes.name 
       && !changes.email 
       && !changes.image_url 
       && !changes.primary_city) {
     // 422 status = invalid input
-    res.status(422).json({ message: 'No changes received' })
+    return res.status(422).json({ message: 'No changes received' })
   }
-  updateUserById(id, changes)
+  return updateUserById(id, changes)
     .then(result => {
       if(result) {
         res.json(result)
+      } else {
+        res.status(422).json({ message: `Invalid user ID: ${id}` })
       }
-      res.status(422).json({ message: `Invalid user ID: ${id}` })
     })
     .catch(error => {
       res.status(400)
