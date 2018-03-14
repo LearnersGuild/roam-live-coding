@@ -7,6 +7,7 @@ const db = require('../db/db')
  * @param {object} newData - keys: 'body' and/or 'title'
  * @returns {promise} - Promise that resolves to an object 
  * representing the updated row in the posts table.
+ *   -> Resolve to null if id doesn't exist in db.
  */
 const updatePostById = function(id, newData) {
   let query = 'UPDATE posts SET\n'
@@ -19,7 +20,7 @@ const updatePostById = function(id, newData) {
     WHERE id = $/id/
     RETURNING *
   `
-  return db.one(query, Object.assign(newData, {id}))
+  return db.oneOrNone(query, Object.assign(newData, {id}))
 }
 
 module.exports = updatePostById

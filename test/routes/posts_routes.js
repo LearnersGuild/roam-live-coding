@@ -9,7 +9,7 @@ const { POST_PROPS } = require('../utilities/properties')
 
 chai.use(chaiHttp)
 
-describe.only('post routes', () => {
+describe('post routes', () => {
   before('reset and seed db', () => resetDb() )
   describe('/posts/:id', () => {
     let response
@@ -43,6 +43,76 @@ describe.only('post routes', () => {
       })
       it('returns json with error message', () => {
         expect(response.body).to.have.property('message')
+      })
+    })
+  })
+})
+
+describe.only('patch /posts/:id', () => {
+  context('Post does not exist', () => {
+    before('Reset DB and access route with nonexistent post', () => {
+      return resetDb()
+        .then(() => {
+          return chai.request(app)
+            .patch('/posts/23456')
+            .send({ title: 'I <3 working at the ministry' })
+        })
+        .catch(err => { 
+          this.errResponse = err.response 
+        })
+      })
+    it('returns status 422', () => {
+      expect(this.errResponse).to.have.status(422)
+    })
+    it('returns json with error message', () => {
+      expect(this.errResponse.body.message).to.include('Invalid post ID')
+    })
+  })
+  context('Post does exist', () => {
+    context('no data sent', () => {
+      before('Reset DB and access route with existent post', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .patch('/posts/1')
+              .send({})
+          })
+          .catch(err => { 
+            this.errResponse = err.response 
+          })
+        })
+      it('returns status 422', () => {
+        expect(this.errResponse).to.have.status(422)
+      })
+      it('returns json with error message', () => {
+        expect(this.errResponse.body.message).to.equal('No changes received')
+      })
+    })
+    context('data sent', () => {
+      const newTitle = 'I <3 working at the ministry'
+      const newBody = 'Visit the ministry today!'
+      before('Reset DB and access route with existent post and data', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .patch('/posts/1')
+              .send({
+                title: newTitle,
+                body: newBody,
+              })
+          })
+          .then(response => {
+            this.response = response
+          })
+        })
+      it('returns response 200', () => {
+        expect(this.response.status).to.equal(200)
+      })
+      it('returns result with updated title', () => {
+        expect(this.response.body.title).to.equal(newTitle)
+      })
+      it('returns result with updated body', () => {
+        expect(this.response.body.body).to.equal(newBody)
       })
     })
   })

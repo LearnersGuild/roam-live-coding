@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### March 13, 2018
+
+  - Change PUT to PATCH for `/users/:id`
+  - Fix tests for PATCH `/users/:id` (check for returns!!)
+  - Add routes and test for GET and PATCH `/posts/:id`
+
 ### March 12, 2018
 
   - Merged Dev's changes from Thursday
