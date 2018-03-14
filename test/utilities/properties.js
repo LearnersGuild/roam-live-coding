@@ -8,6 +8,11 @@ const CITY_PROPS = [
   'posts',
 ]
 
+const POST_PROPS = [
+
+]
+
 module.exports = {
-  CITY_PROPS
+  CITY_PROPS,
+  POST_PROPS,
 }

@@ -79,14 +79,16 @@ describe('patch /users/:id', () => {
       })
     })
     context('data sent', () => {
+      const hpName = 'Harry Potter'
+      const hpEmail = 'hpotter@ministryofmagic.gov.uk'
       before('Reset DB and access route with existent user and data', () => {
         return resetDb()
           .then(() => {
             return chai.request(app)
               .patch('/users/1')
               .send({
-                name: 'Harry Potter',
-                email: 'hpotter@ministryofmagic.gov.uk',
+                name: hpName,
+                email: hpEmail,
               })
           })
           .then(response => {
@@ -95,6 +97,12 @@ describe('patch /users/:id', () => {
         })
       it('returns response 200', () => {
         expect(this.response.status).to.equal(200)
+      })
+      it('returns result with updated name', () => {
+        expect(this.response.body.name).to.equal(hpName)
+      })
+      it('returns result with updated email', () => {
+        expect(this.response.body.email).to.equal(hpEmail)
       })
     })
   })
