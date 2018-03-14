@@ -5,15 +5,7 @@ const addPost = require('../../src/actions/addPost')
 const getPostDataById = require('../../src/actions/getPostDataById')
 const deletePostById = require('../../src/actions/deletePostById')
 const updatePostById = require('../../src/actions/updatePostById')
-
-const POST_PROPS = [
-  'id',
-  'city_id',
-  'user_id',
-  'title',
-  'body',
-  'created_at',
-]
+const { POST_PROPS } = require('../utilities/properties')
 
 // describe('add new post', function() {
 //   let newPost

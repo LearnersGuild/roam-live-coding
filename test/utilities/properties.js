@@ -9,7 +9,12 @@ const CITY_PROPS = [
 ]
 
 const POST_PROPS = [
-
+  'id',
+  'city_id',
+  'user_id',
+  'title',
+  'body',
+  'created_at',
 ]
 
 module.exports = {
