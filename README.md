@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### March 20, 2018
+
+  - Update deletePostById to return `null` when id doesn't exist
+  - Create `DELETE /posts/:id` route and tests
+  - 
+
 ### March 13, 2018
 
   - Change PUT to PATCH for `/users/:id`

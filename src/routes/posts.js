@@ -2,6 +2,7 @@ const express = require('express')
 const getPostDataById = require('../actions/getPostDataById')
 const updatePostById = require('../actions/updatePostById')
 const deletePostById = require('../actions/deletePostById')
+const addPost = require('../actions/addPost')
 
 const postRouter = express.Router()
 
@@ -56,6 +57,20 @@ postRouter.delete('/:id', (req, res) => {
     .catch(error => {
       res.status(400)
         .json({message: `Failed to delete post: ${error.toString()}`})
+    })
+})
+
+postRouter.post('/', (req, res) => {
+  const { city_id, user_id, title, body } = req.body
+  if (!city_id || !user_id || !title || !body ) {
+    return res.status(422).json({ message: 'Post must have a city_id, user_id, title AND body'})
+  }
+  return addPost(city_id, user_id, title, body) 
+    .then(result => {
+      return res.json(result)
+    })
+    .catch(error => {
+      res.status(400).json({ message: `Failed to add post: ${error.toString()}`})
     })
 })
 

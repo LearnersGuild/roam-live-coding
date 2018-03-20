@@ -32,7 +32,7 @@
         x* PATCH `/users/:id` edit user profile (AJAX)
         x* GET `/posts/:id` serve existing post (and its comments)
         x* PATCH `/posts/:id` update existing post (AJAX)
-        * DELETE `/posts/:id` delete existing post (AJAX)
+        x* DELETE `/posts/:id` delete existing post (AJAX)
         * POST `/posts` process new post
         x* GET `/cities/:id` serve city detail
     * views

@@ -119,7 +119,7 @@ describe('patch /posts/:id', () => {
 })
 
 
-describe.only('delete /posts/:id', () => {
+describe('delete /posts/:id', () => {
   context('Post does not exist', () => {
     before('Reset DB and access route with nonexistent post', () => {
       return resetDb()
@@ -153,4 +153,55 @@ describe.only('delete /posts/:id', () => {
       expect(this.response.status).to.equal(200)
     })    
   })
+})
+
+describe('post /posts', () => {
+    context('no data sent', () => {
+      before('Reset DB and access route with existent post', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .post('/posts')
+              .send({})
+          })
+          .catch(err => { 
+            this.errResponse = err.response 
+          })
+        })
+      it('returns status 422', () => {
+        expect(this.errResponse).to.have.status(422)
+      })
+      it('returns json with error message', () => {
+        expect(this.errResponse.body.message).to.contain('Post must have')
+      })
+    })
+    context('data sent', () => {
+      const user_id = 1
+      const city_id = 1
+      const title = 'I <3 working at the ministry'
+      const body = 'Visit the ministry today!'
+      before('Reset DB and access route with existent post and data', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .post('/posts')
+              .send( {user_id, city_id, title, body} )
+          })
+          .then(response => {
+            this.response = response
+          })
+        })
+      it('returns response 200', () => {
+        expect(this.response.status).to.equal(200)
+      })
+      it('returns result with updated title', () => {
+        expect(this.response.body.title).to.equal(title)
+      })
+      it('returns result with updated body', () => {
+        expect(this.response.body.body).to.equal(body)
+      })
+      it('returns a valid id', () => {
+        expect(this.response.body.id).to.be.a('Number')
+      })
+    })
 })
