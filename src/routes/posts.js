@@ -46,7 +46,17 @@ postRouter.patch('/:id', (req, res) => {
 postRouter.delete('/:id', (req, res) => {
   const { id } = req.params
   return deletePostById(id)
-    .then()
+    .then(result => {
+      if(result) {
+        res.json(result)
+      } else {
+        res.status(422).json({ message: `Invalid post ID: ${id}` })
+      }
+    })
+    .catch(error => {
+      res.status(400)
+        .json({message: `Failed to delete post: ${error.toString()}`})
+    })
 })
 
 module.exports = postRouter

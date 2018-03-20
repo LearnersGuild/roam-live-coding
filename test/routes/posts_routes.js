@@ -117,3 +117,40 @@ describe('patch /posts/:id', () => {
     })
   })
 })
+
+
+describe.only('delete /posts/:id', () => {
+  context('Post does not exist', () => {
+    before('Reset DB and access route with nonexistent post', () => {
+      return resetDb()
+        .then(() => {
+          return chai.request(app)
+            .delete('/posts/23456')
+        })
+        .catch(err => { 
+          this.errResponse = err.response 
+        })
+      })
+    it('returns status 422', () => {
+      expect(this.errResponse).to.have.status(422)
+    })
+    it('returns json with error message', () => {
+      expect(this.errResponse.body.message).to.include('Invalid post ID')
+    })
+  })
+  context('Post does exist', () => {
+    before('Reset DB and access route with existent post', () => {
+      return resetDb()
+        .then(() => {
+          return chai.request(app)
+            .delete('/posts/1')
+        })
+        .then(response => {
+          this.response = response
+        })
+      })
+    it('returns response 200', () => {
+      expect(this.response.status).to.equal(200)
+    })    
+  })
+})
