@@ -48,7 +48,7 @@ describe('post routes', () => {
   })
 })
 
-describe.only('patch /posts/:id', () => {
+describe('patch /posts/:id', () => {
   context('Post does not exist', () => {
     before('Reset DB and access route with nonexistent post', () => {
       return resetDb()

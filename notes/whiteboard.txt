@@ -33,8 +33,7 @@
         x* GET `/posts/:id` serve existing post (and its comments)
         x* PATCH `/posts/:id` update existing post (AJAX)
         * DELETE `/posts/:id` delete existing post (AJAX)
-        * GET `/posts/new` serve post form
-        * POST `/posts/new` process new post
+        * POST `/posts` process new post
         x* GET `/cities/:id` serve city detail
     * views
         * header (template partial)

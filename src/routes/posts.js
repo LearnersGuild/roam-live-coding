@@ -1,6 +1,7 @@
 const express = require('express')
 const getPostDataById = require('../actions/getPostDataById')
 const updatePostById = require('../actions/updatePostById')
+const deletePostById = require('../actions/deletePostById')
 
 const postRouter = express.Router()
 
@@ -41,5 +42,11 @@ postRouter.patch('/:id', (req, res) => {
         .json({message: `Failed to update post: ${error.toString()}`})
     })
   })
-  
+
+postRouter.delete('/:id', (req, res) => {
+  const { id } = req.params
+  return deletePostById(id)
+    .then()
+})
+
 module.exports = postRouter
