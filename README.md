@@ -12,7 +12,7 @@
 
   - Update deletePostById to return `null` when id doesn't exist
   - Create `DELETE /posts/:id` route and tests
-  - 
+  - Create `POST /posts` route and tests
 
 ### March 13, 2018
 
