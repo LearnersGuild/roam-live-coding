@@ -35,9 +35,8 @@ const clearDb = function () {
  * @returns {promise} - Promise whose resolution is unimportant
  */
 const seedDb = () => {
-  // TODO: when I have a password encryption function, 
-  // save encrypted password instead
-  const password = ''
+
+  const password = 'test'
   const city = 'Oakland'
   const image_url = ''
   const createUserQuery = `

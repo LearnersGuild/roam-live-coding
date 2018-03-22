@@ -5,6 +5,7 @@ const getUserById = require('../../src/actions/getUserById')
 const getUserByEmail = require('../../src/actions/getUserByEmail')
 const getUserDataById = require('../../src/actions/getUserDataById')
 const updateUserById = require('../../src/actions/updateUserById')
+const checkUserLogin = require('../../src/actions/checkUserLogin')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
 
 const USER_PROPS = [
@@ -178,5 +179,29 @@ describe('updateUserById', function() {
         expect(newUserRow[prop]).to.equal(newData[prop])
       })
     }
+  })
+})
+
+describe('checkUserLogin', () => {
+  beforeEach('reset db', () => {
+    return resetDb()
+  })
+  it('existing user with good password', () => {
+    return checkUserLogin('test@test.test', 'test')
+      .then(result => {
+        expect(result).to.be.true
+      })
+  })
+  it('existing user with bad password', () => {
+    return checkUserLogin('test@test.test', 'bad')
+      .then(result => {
+        expect(result).to.be.false
+      })
+  })
+  it('nonexistent user', () => {
+    return checkUserLogin('hpotter@ministryofmagic.gov', 'iheartginny')
+      .then(result => {
+        expect(result).to.be.null
+      })
   })
 })
