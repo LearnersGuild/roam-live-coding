@@ -2,6 +2,7 @@ const { expect } = require('chai')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
 const getUserById = require('../../src/actions/getUserById')
+const getUserByEmail = require('../../src/actions/getUserByEmail')
 const getUserDataById = require('../../src/actions/getUserDataById')
 const updateUserById = require('../../src/actions/updateUserById')
 const { encryptPassword, comparePassword } = require('../../src/utilities/password')
@@ -41,6 +42,28 @@ describe('add new user', function() {
   })
   it('adds the primary_city to the database', () => {
     expect(newUser.primary_city).to.equal(primary_city)
+  })
+})
+
+describe('getUserByEmail', function() {
+  let userRow
+  context('user exists', () => {
+    before('reset the database and retrieve existing user', () => {
+      return resetDb()
+        .then(() => getUserByEmail('test@test.test'))
+        .then(result => userRow = result)
+    })
+    USER_PROPS.forEach(prop => {
+      it(`returns an object with the '${prop}' property`, () => {
+        expect(userRow).to.have.property(prop)
+      })
+    })
+  })
+  it('return null when the user does not exist', () => {
+    return getUserByEmail('fake@notanemail.doesntexist')
+      .then(userRow => {
+        expect(userRow).to.be.null
+      })
   })
 })
 
