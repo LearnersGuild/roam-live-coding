@@ -8,6 +8,15 @@
 
 ## Daily Log
 
+### March 21, 2018
+
+  - Revive `getUserByEmail` from previous git commits (it had been changed into `getUserById`)
+  - Finish `checkUserLogin` (it was there but woefully incomplete)
+  - Create files for the passport strategies (`services/passport.js`) and authentication route functions (`controllers/authentication.js`)
+  - Create `/auth/sign-in` route with passport local strategy middleware
+  - Started the server, worked out some kinks with `dotenv`
+  - Try to test `/auth/sign-in` using postman; realized we don't have anyone in our production database whose password we know. Will test tomorrow.
+
 ### March 20, 2018
 
   - Update deletePostById to return `null` when id doesn't exist
