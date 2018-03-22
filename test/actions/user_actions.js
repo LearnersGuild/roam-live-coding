@@ -186,16 +186,22 @@ describe('checkUserLogin', () => {
   beforeEach('reset db', () => {
     return resetDb()
   })
-  it('returns true for existing user with good password', () => {
-    return checkUserLogin('test@test.test', 'test')
-      .then(result => {
-        expect(result).to.be.true
+  describe('existing user with good password', () => {
+    let returnedUser
+    before(() => {
+      return checkUserLogin('test@test.test', 'test')
+        .then(user => returnedUser = user)
+    })
+    USER_PROPS.forEach(prop => {
+      it(`returns an object with the '${prop}' property`, () => {
+        expect(returnedUser).to.have.property(prop)
       })
+    })
   })
-  it('return false for existing user with bad password', () => {
+  it('return null for existing user with bad password', () => {
     return checkUserLogin('test@test.test', 'bad')
       .then(result => {
-        expect(result).to.be.false
+        expect(result).to.be.null
       })
   })
   it('returns null for nonexistent user', () => {

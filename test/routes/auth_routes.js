@@ -14,7 +14,7 @@ describe('User Failure Route', () =>
   )
 )
 
-describe.only('/auth/sign-in', () => {
+describe('/auth/sign-in', () => {
   beforeEach('reset db', () => {
     return resetDb()
   })
