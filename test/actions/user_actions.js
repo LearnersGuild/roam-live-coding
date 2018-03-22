@@ -186,19 +186,19 @@ describe('checkUserLogin', () => {
   beforeEach('reset db', () => {
     return resetDb()
   })
-  it('existing user with good password', () => {
+  it('returns true for existing user with good password', () => {
     return checkUserLogin('test@test.test', 'test')
       .then(result => {
         expect(result).to.be.true
       })
   })
-  it('existing user with bad password', () => {
+  it('return false for existing user with bad password', () => {
     return checkUserLogin('test@test.test', 'bad')
       .then(result => {
         expect(result).to.be.false
       })
   })
-  it('nonexistent user', () => {
+  it('returns null for nonexistent user', () => {
     return checkUserLogin('hpotter@ministryofmagic.gov', 'iheartginny')
       .then(result => {
         expect(result).to.be.null
