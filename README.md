@@ -8,6 +8,13 @@
 
 ## Daily Log
 
+### March 22, 2018
+
+  - Add tests for `checkUserLogin`
+  - Add tests for `/auth/sign-in` route
+  - Update `checkUserLogin` to return user on success
+  - Add code to generate token on sign-in
+
 ### March 21, 2018
 
   - Revive `getUserByEmail` from previous git commits (it had been changed into `getUserById`)
