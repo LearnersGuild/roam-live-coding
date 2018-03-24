@@ -8,6 +8,17 @@
 
 ## Daily Log
 
+### March 23, 2018
+
+  - Make sign-up route: `/auth/sign-up`
+    - Return either error if bad user info
+      - blank email / password
+      - email already in use
+    - Or return jwt if user created
+  - Write tests for `/auth/sign-up`
+  - Discuss mutable objects and why you have to be careful with them
+  - Discuss testing philosophy and the balance between completeness vs. wasted effort
+
 ### March 22, 2018
 
   - Add tests for `checkUserLogin`

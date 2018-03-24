@@ -10,4 +10,7 @@ const authRouter = express.Router()
 const requireSignin = passport.authenticate('local', { session: false })
 authRouter.post('/sign-in', requireSignin, Authentication.signin)
 
+/////////// sign-up /////////////
+authRouter.post('/sign-up', Authentication.signup)
+
 module.exports = authRouter
