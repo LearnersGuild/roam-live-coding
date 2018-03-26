@@ -66,7 +66,7 @@ describe('patch /users/:id', () => {
     before('generate token for user ID 1', () =>  {
       token = generateToken({ id: 1 })
     })
-    context.only('User does not exist', () => {
+    context('User does not exist (and does not match jwt)', () => {
       before('Reset DB and access route with nonexistent user', () => {
         return resetDb()
           .then(() => {
@@ -83,16 +83,17 @@ describe('patch /users/:id', () => {
         expect(this.errResponse).to.have.status(401)
       })
       it('returns json with error message', () => {
-        expect(this.errResponse.body.message).to.include('trying not to update user')
+        expect(this.errResponse.body.message).to.include('trying to update user')
       })
     })
-    context('User does exist', () => {
+    context('User does exist and matches jwt', () => {
       context('no data sent', () => {
         before('Reset DB and access route with existent user', () => {
           return resetDb()
             .then(() => {
               return chai.request(app)
                 .patch('/users/1')
+                .set('authorization', token)
                 .send({})
             })
             .catch(err => { 
@@ -114,6 +115,7 @@ describe('patch /users/:id', () => {
             .then(() => {
               return chai.request(app)
                 .patch('/users/1')
+                .set('authorization', token)
                 .send({
                   name: hpName,
                   email: hpEmail,
