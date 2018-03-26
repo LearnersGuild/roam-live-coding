@@ -4,6 +4,7 @@ const chaiHttp = require('chai-http')
 const { resetDb } = require('../utilities/db_reset')
 const addUser = require('../../src/actions/addUser')
 const app = require('../../src')
+const { generateToken } = require('../../src/controllers/authentication')
 // const { CITY_PROPS } = require('../utilities/properties')
 
 const name = 'Lamar Schmo'
@@ -39,70 +40,98 @@ describe('User Success Route', () => {
 })
 
 describe('patch /users/:id', () => {
-  context('User does not exist', () => {
-    before('Reset DB and access route with nonexistent user', () => {
+  context('no jwt', () => {
+    before('Reset DB', () => {
       return resetDb()
-        .then(() => {
-          return chai.request(app)
-            .patch('/users/23456')
-            .send({ name: 'Bugs Bunny' })
-        })
-        .catch(err => { 
-          this.errResponse = err.response 
-        })
-      })
-    it('returns status 422', () => {
-      expect(this.errResponse).to.have.status(422)
     })
-    it('returns json with error message', () => {
-      expect(this.errResponse.body.message).to.include('Invalid user ID')
+    it('returns status 401 for nonexistent user', () => {
+      return chai.request(app)
+        .patch('/users/23456')
+        .send({ name: 'Bugs Bunny' })
+        .catch(err => { 
+          expect(err.response).to.have.status(401)
+        })
+    })  
+    it('returns status 401 for existing user', () => {
+      return chai.request(app)
+        .patch('/users/1')
+        .send({ name: 'Bugs Bunny' })
+        .catch(err => { 
+          expect(err.response).to.have.status(401)
+        })    
     })
   })
-  context('User does exist', () => {
-    context('no data sent', () => {
-      before('Reset DB and access route with existent user', () => {
+  context.only('with jwt', () => {
+    let token
+    before('generate token for user ID 1', () =>  {
+      token = generateToken({ id: 1 })
+    })
+    context.only('User does not exist', () => {
+      before('Reset DB and access route with nonexistent user', () => {
         return resetDb()
           .then(() => {
             return chai.request(app)
-              .patch('/users/1')
-              .send({})
+              .patch('/users/23456')
+              .set('authorization', token)
+              .send({ name: 'Bugs Bunny' })
           })
           .catch(err => { 
             this.errResponse = err.response 
           })
         })
-      it('returns status 422', () => {
-        expect(this.errResponse).to.have.status(422)
+      it('returns status 401', () => {
+        expect(this.errResponse).to.have.status(401)
       })
       it('returns json with error message', () => {
-        expect(this.errResponse.body.message).to.equal('No changes received')
+        expect(this.errResponse.body.message).to.include('trying not to update user')
       })
     })
-    context('data sent', () => {
-      const hpName = 'Harry Potter'
-      const hpEmail = 'hpotter@ministryofmagic.gov.uk'
-      before('Reset DB and access route with existent user and data', () => {
-        return resetDb()
-          .then(() => {
-            return chai.request(app)
-              .patch('/users/1')
-              .send({
-                name: hpName,
-                email: hpEmail,
-              })
+    context('User does exist', () => {
+      context('no data sent', () => {
+        before('Reset DB and access route with existent user', () => {
+          return resetDb()
+            .then(() => {
+              return chai.request(app)
+                .patch('/users/1')
+                .send({})
+            })
+            .catch(err => { 
+              this.errResponse = err.response 
+            })
           })
-          .then(response => {
-            this.response = response
-          })
+        it('returns status 422', () => {
+          expect(this.errResponse).to.have.status(422)
         })
-      it('returns response 200', () => {
-        expect(this.response.status).to.equal(200)
+        it('returns json with error message', () => {
+          expect(this.errResponse.body.message).to.equal('No changes received')
+        })
       })
-      it('returns result with updated name', () => {
-        expect(this.response.body.name).to.equal(hpName)
-      })
-      it('returns result with updated email', () => {
-        expect(this.response.body.email).to.equal(hpEmail)
+      context('data sent', () => {
+        const hpName = 'Harry Potter'
+        const hpEmail = 'hpotter@ministryofmagic.gov.uk'
+        before('Reset DB and access route with existent user and data', () => {
+          return resetDb()
+            .then(() => {
+              return chai.request(app)
+                .patch('/users/1')
+                .send({
+                  name: hpName,
+                  email: hpEmail,
+                })
+            })
+            .then(response => {
+              this.response = response
+            })
+          })
+        it('returns response 200', () => {
+          expect(this.response.status).to.equal(200)
+        })
+        it('returns result with updated name', () => {
+          expect(this.response.body.name).to.equal(hpName)
+        })
+        it('returns result with updated email', () => {
+          expect(this.response.body.email).to.equal(hpEmail)
+        })
       })
     })
   })

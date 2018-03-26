@@ -1,6 +1,7 @@
 const express = require('express')
 const getUserDataById = require('../actions/getUserDataById')
 const updateUserById = require('../actions/updateUserById')
+const requireAuth = require('../middlewares/requireAuth')
 
 const userRouter = express.Router()
 
@@ -19,6 +20,8 @@ userRouter.get('/:id', (req, res) => {
 })
 
 /*
+  Use authentication middleware for this route
+
   expected data in JSON format.
   Possible keys: 
     name
@@ -26,9 +29,14 @@ userRouter.get('/:id', (req, res) => {
     image_url
     primary_city
 */
-userRouter.patch('/:id', (req, res) => {
-  // TODO: make sure the request is for the AUTHENTICATED user
+userRouter.patch('/:id', requireAuth, (req, res) => {
   const { id } = req.params
+
+  // if it's the wrong user
+  if (req.user.id !== id) {
+    return res.status(401).json({ message: `user ${req.user.id} is trying to update user ${id}'s data!` })
+  }
+
   const changes = req.body
 
   if (!changes.name 

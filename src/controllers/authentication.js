@@ -56,4 +56,5 @@ const signup = (req, res) => {
 module.exports = {
   signin,
   signup,
+  generateToken,
 }
