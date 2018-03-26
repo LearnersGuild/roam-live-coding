@@ -10,6 +10,8 @@
 
 ### March 23, 2018
 
+  - [YouTube link to recording](https://youtu.be/FKIXWF_jZF8)
+
   - Make sign-up route: `/auth/sign-up`
     - Return either error if bad user info
       - blank email / password
