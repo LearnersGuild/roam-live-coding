@@ -10,6 +10,8 @@
 
 ### March 26, 2018
 
+  - [YouTube link to recording (warning: screen not shared for part of it!)](https://youtu.be/k97J4pdzbkM)
+
   - Add jwt middleware for route authentication
   - Protect `PATCH /users/:id` route and test
     - Test for requests without jwt
