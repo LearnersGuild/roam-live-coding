@@ -20,23 +20,25 @@ postRouter.get('/:id', (req, res) => {
     .catch(console.error)
 })
 
-postRouter.patch('/:id', (req, res) => {
+postRouter.patch('/:id', requireAuth, (req, res) => {
   // TODO: make sure the request is for the AUTHENTICATED user
   const { id } = req.params
+  const userId = req.user.id
   const changes = req.body
 
   // TODO: allow user to update city
-  if (!changes.title 
+  if (!changes.title
       && !changes.body ) {
     // 422 status = invalid input
     return res.status(422).json({ message: 'No changes received' })
   }
-  return updatePostById(id, changes)
+  return updatePostById(id, userId, changes)
     .then(result => {
       if(result) {
         res.json(result)
       } else {
-        res.status(422).json({ message: `Invalid post ID: ${id}` })
+        // query returns empty if either post id or user_id fails to match, so not sure how to differentiate between those errors. 
+        res.status(422).json({ message: `Invalid post ID: ${id} or unauthorized user.` })
       }
     })
     .catch(error => {
@@ -67,7 +69,7 @@ postRouter.post('/', requireAuth, (req, res) => {
   if (!city_id || !title || !body ) {
     return res.status(422).json({ message: 'Post must have a city_id, title AND body'})
   }
-  return addPost(city_id, user_id, title, body) 
+  return addPost(city_id, user_id, title, body)
     .then(result => {
       return res.json(result)
     })
