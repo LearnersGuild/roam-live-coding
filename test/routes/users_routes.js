@@ -61,7 +61,7 @@ describe('patch /users/:id', () => {
         })    
     })
   })
-  context.only('with jwt', () => {
+  context('with jwt', () => {
     let token
     before('generate token for user ID 1', () =>  {
       token = generateToken({ id: 1 })

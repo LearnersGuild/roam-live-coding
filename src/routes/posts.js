@@ -3,6 +3,7 @@ const getPostDataById = require('../actions/getPostDataById')
 const updatePostById = require('../actions/updatePostById')
 const deletePostById = require('../actions/deletePostById')
 const addPost = require('../actions/addPost')
+const requireAuth = require('../middlewares/requireAuth')
 
 const postRouter = express.Router()
 
@@ -60,10 +61,11 @@ postRouter.delete('/:id', (req, res) => {
     })
 })
 
-postRouter.post('/', (req, res) => {
-  const { city_id, user_id, title, body } = req.body
-  if (!city_id || !user_id || !title || !body ) {
-    return res.status(422).json({ message: 'Post must have a city_id, user_id, title AND body'})
+postRouter.post('/', requireAuth, (req, res) => {
+  const user_id = req.user.id
+  const { city_id, title, body } = req.body
+  if (!city_id || !title || !body ) {
+    return res.status(422).json({ message: 'Post must have a city_id, title AND body'})
   }
   return addPost(city_id, user_id, title, body) 
     .then(result => {

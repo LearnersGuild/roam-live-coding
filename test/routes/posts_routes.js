@@ -5,6 +5,7 @@ const { expect } = require('chai')
 const chaiHttp = require('chai-http')
 const { resetDb } = require('../utilities/db_reset')
 const app = require('../../src')
+const { generateToken } = require('../../src/controllers/authentication')
 const { POST_PROPS } = require('../utilities/properties')
 
 chai.use(chaiHttp)
@@ -156,12 +157,28 @@ describe('delete /posts/:id', () => {
 })
 
 describe('post /posts', () => {
+  context('no jwt', () => {
+    it('returns 401 error', () => {
+      return chai.request(app)
+        .post('/posts')
+        .send({})
+        .catch(err => {
+          expect(err.response.status).to.equal(401)
+      })
+    })    
+  })
+  context('jwt', () => {
+    let token
+    before('generate token for user ID 1', () =>  {
+      token = generateToken({ id: 1 })
+    })
     context('no data sent', () => {
       before('Reset DB and access route with existent post', () => {
         return resetDb()
           .then(() => {
             return chai.request(app)
               .post('/posts')
+              .set('authorization', token)
               .send({})
           })
           .catch(err => { 
@@ -185,7 +202,8 @@ describe('post /posts', () => {
           .then(() => {
             return chai.request(app)
               .post('/posts')
-              .send( {user_id, city_id, title, body} )
+              .set('authorization', token)
+              .send( {city_id, title, body} )
           })
           .then(response => {
             this.response = response
@@ -204,4 +222,5 @@ describe('post /posts', () => {
         expect(this.response.body.id).to.be.a('Number')
       })
     })
+  })
 })
