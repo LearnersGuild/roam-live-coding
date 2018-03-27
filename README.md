@@ -8,6 +8,14 @@
 
 ## Daily Log
 
+### March 26, 2018
+
+  - Add jwt middleware for route authentication
+  - Protect `PATCH /users/:id` route and test
+    - Test for requests without jwt
+    - Test for request with user that doesn't match jwt
+  - Protect `POST /posts` route and test
+
 ### March 23, 2018
 
   - [YouTube link to recording](https://youtu.be/FKIXWF_jZF8)
