@@ -25,9 +25,9 @@
 
 
     * routes
-        * GET `/authentication` serve signup / login
-        * POST `/authentication/login` process login
-        * POST `/authentication/signup` process signup
+        x* GET `/authentication` serve signup / login
+        x* POST `/authentication/login` process login
+        x* POST `/authentication/signup` process signup
         x* GET `/users/:id` serve user profile page
         x* PATCH `/users/:id` edit user profile (AJAX)
         x* GET `/posts/:id` serve existing post (and its comments)
@@ -38,13 +38,22 @@
     * views
         * header (template partial)
         * sign up / login
+          /signup
+          /signin
         * user profile page
+          /users/:id
           * allow edit
         * view existing post
+          /posts/:id
           * allow edit
           * allow delete (with pop-up)
         * create new post
+          /posts/new
         * view city detail
+          /cities/:id
+    * store
+      * logged-in user (whole object)
+      * list of city names
     * third-party apis (front-end)
       * google places ("iconic picture of city")
       * google maps API
