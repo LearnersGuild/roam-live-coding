@@ -8,6 +8,11 @@
 
 ## Daily Log
 
+### March 27, 2018
+
+  - Protect `PATCH /posts/:id` (including checking for correct user) and test
+  - Ditto for  `DELETE /posts/:id`
+
 ### March 26, 2018
 
   - [YouTube link to recording (warning: screen not shared for part of it!)](https://youtu.be/k97J4pdzbkM)
