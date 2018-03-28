@@ -204,8 +204,8 @@ describe('delete /posts/:id', () => {
             .delete('/posts/1')
             .set('authorization', badToken)
         })
-        .then(response => {
-          this.response = response
+        .catch(err => {
+          this.errResponse = err.response
         })
       })
       it('returns status 422', () => {
