@@ -38,7 +38,7 @@ postRouter.patch('/:id', requireAuth, (req, res) => {
         res.json(result)
       } else {
         // query returns empty if either post id or user_id fails to match, so not sure how to differentiate between those errors. 
-        res.status(422).json({ message: `Invalid post ID: ${id} or unauthorized user.` })
+        res.status(422).json({ message: `No post with that ID for authenticated user` })
       }
     })
     .catch(error => {
@@ -47,14 +47,15 @@ postRouter.patch('/:id', requireAuth, (req, res) => {
     })
   })
 
-postRouter.delete('/:id', (req, res) => {
+postRouter.delete('/:id', requireAuth, (req, res) => {
   const { id } = req.params
-  return deletePostById(id)
+  const userId = req.user.id
+  return deletePostById(id, userId)
     .then(result => {
       if(result) {
         res.json(result)
       } else {
-        res.status(422).json({ message: `Invalid post ID: ${id}` })
+        res.status(422).json({ message: `No post with that ID for the authenticated user` })
       }
     })
     .catch(error => {

@@ -49,77 +49,19 @@ describe('post routes', () => {
   })
 })
 
-describe.only('patch /posts/:id', () => {
-  context('no jwt', () => {
-    context('Post does not exist', () => {
-      before('Reset DB and access route with nonexistent post', () => {
-        return resetDb()
-        .then(() => {
-          return chai.request(app)
-          .patch('/posts/23456')
-          .send({ title: 'I <3 working at the ministry' })
-        })
-        .catch(err => {
-          this.errResponse = err.response
-        })
+describe('patch /posts/:id', () => {
+  it('returns 401 when not authenticated', () => {
+    return resetDb()
+      .then(() => {
+        return chai.request(app)
+        .patch('/posts/1')
+        .send({ title: 'I <3 working at the ministry' })
       })
-      it('returns status 401', () => {
-        expect(this.errResponse).to.have.status(401)
+      .catch(err => {
+        expect(err.response).to.have.status(401)
       })
-      it('returns json with error message', () => {
-        expect(this.errResponse.body.message).to.include('Invalid post ID')
-      })
-    })
-    context('Post does exist', () => {
-      context('no data sent', () => {
-        before('Reset DB and access route with existent post', () => {
-          return resetDb()
-          .then(() => {
-            return chai.request(app)
-            .patch('/posts/1')
-            .send({})
-          })
-          .catch(err => {
-            this.errResponse = err.response
-          })
-        })
-        it('returns status 422', () => {
-          expect(this.errResponse).to.have.status(422)
-        })
-        it('returns json with error message', () => {
-          expect(this.errResponse.body.message).to.equal('No changes received')
-        })
-      })
-      context('data sent', () => {
-        const newTitle = 'I <3 working at the ministry'
-        const newBody = 'Visit the ministry today!'
-        before('Reset DB and access route with existent post and data', () => {
-          return resetDb()
-          .then(() => {
-            return chai.request(app)
-            .patch('/posts/1')
-            .send({
-              title: newTitle,
-              body: newBody,
-            })
-          })
-          .then(response => {
-            this.response = response
-          })
-        })
-        it('returns response 200', () => {
-          expect(this.response.status).to.equal(200)
-        })
-        it('returns result with updated title', () => {
-          expect(this.response.body.title).to.equal(newTitle)
-        })
-        it('returns result with updated body', () => {
-          expect(this.response.body.body).to.equal(newBody)
-        })
-      })
-    })
   })
-  context('jwt exists', () => {
+  context('authenticated (jwt exists)', () => {
     let token
     before('generate token for user ID 1', () =>  {
       token = generateToken({ id: 1 })
@@ -141,7 +83,7 @@ describe.only('patch /posts/:id', () => {
         expect(this.errResponse).to.have.status(422)
       })
       it('returns json with error message', () => {
-        expect(this.errResponse.body.message).to.include('Invalid post ID')
+        expect(this.errResponse.body.message.length).not.to.equal(0)
       })
     })
     context('Post does exist', () => {
@@ -162,7 +104,28 @@ describe.only('patch /posts/:id', () => {
           expect(this.errResponse).to.have.status(422)
         })
         it('returns json with error message', () => {
-          expect(this.errResponse.body.message).to.equal('No changes received')
+          expect(this.errResponse.body.message.length).not.to.equal(0)
+        })
+      })
+      context('userId doesn\'t match post\'s userId', () => {
+        before('reset DB and send request', () => {
+          const badUserToken = generateToken({ id: 2 })
+          return resetDb()
+          .then(() => {
+            return chai.request(app)
+            .patch('/posts/1')
+            .set('authorization', badUserToken)
+            .send({ title: 'I <3 working at the ministry' })
+          })
+          .catch(err => {
+            this.errResponse = err.response
+          })
+        })
+        it('returns status 422', () => {
+          expect(this.errResponse).to.have.status(422)
+        })
+        it('returns message about No post with that ID', () => {
+          expect(this.errResponse.body.message.length).not.to.equal(0)
         })
       })
       context('data sent', () => {
@@ -194,43 +157,79 @@ describe.only('patch /posts/:id', () => {
         })
       })
     })
-
   })
 })
 
-
 describe('delete /posts/:id', () => {
-  context('Post does not exist', () => {
-    before('Reset DB and access route with nonexistent post', () => {
-      return resetDb()
-        .then(() => {
-          return chai.request(app)
-            .delete('/posts/23456')
-        })
-        .catch(err => {
-          this.errResponse = err.response
-        })
+  it('returns 401 when not authenticated', () => {
+    return resetDb()
+      .then(() => {
+        return chai.request(app)
+          .delete('/posts/1')
       })
-    it('returns status 422', () => {
-      expect(this.errResponse).to.have.status(422)
-    })
-    it('returns json with error message', () => {
-      expect(this.errResponse.body.message).to.include('Invalid post ID')
-    })
+      .catch(err => {
+        expect(err.response).to.have.status(401)
+      })
   })
-  context('Post does exist', () => {
-    before('Reset DB and access route with existent post', () => {
-      return resetDb()
+  context('authenticated', () => {
+    let token
+    before('generate token for user ID 1', () =>  {
+      token = generateToken({ id: 1 })
+    })
+    context('Post does not exist', () => {
+      before('Reset DB and access route with nonexistent post', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .delete('/posts/23456')
+              .set('authorization', token)
+          })
+          .catch(err => {
+            this.errResponse = err.response
+          })
+        })
+      it('returns status 422', () => {
+        expect(this.errResponse).to.have.status(422)
+      })
+      it('returns json with error message', () => {
+        expect(this.errResponse.body.message.length).not.to.equal(0)
+      })
+    })
+    context('Post exists but for different user', () => {
+      before('reset db and send request', () => {
+        const badToken = generateToken({ id: 2 })
+        return resetDb()
         .then(() => {
           return chai.request(app)
             .delete('/posts/1')
+            .set('authorization', badToken)
         })
         .then(response => {
           this.response = response
         })
       })
-    it('returns response 200', () => {
-      expect(this.response.status).to.equal(200)
+      it('returns status 422', () => {
+        expect(this.errResponse).to.have.status(422)
+      })
+      it('returns json with error message', () => {
+        expect(this.errResponse.body.message.length).not.to.equal(0)
+      })      
+    })
+    context('Post does exist', () => {
+      before('Reset DB and access route with existent post', () => {
+        return resetDb()
+          .then(() => {
+            return chai.request(app)
+              .delete('/posts/1')
+              .set('authorization', token)
+          })
+          .then(response => {
+            this.response = response
+          })
+        })
+      it('returns response 200', () => {
+        expect(this.response.status).to.equal(200)
+      })
     })
   })
 })
@@ -268,7 +267,7 @@ describe('post /posts', () => {
         expect(this.errResponse).to.have.status(422)
       })
       it('returns json with error message', () => {
-        expect(this.errResponse.body.message).to.contain('Post must have')
+        expect(this.errResponse.body.message.length).not.to.equal(0)
       })
     })
     context('data sent', () => {

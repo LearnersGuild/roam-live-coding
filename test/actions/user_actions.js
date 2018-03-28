@@ -83,7 +83,7 @@ describe('getUserById', function() {
   })
   it('return null when the user does not exist', () => {
     before('reset the db and run getUserDataById')
-    return getUserById(2)
+    return getUserById(-1)
       .then(userRow => {
         expect(userRow).to.be.null
       })
@@ -116,7 +116,7 @@ describe('getUserDataById', function() {
     })
   })
   it('return null when the user does not exist', () => {
-    return getUserDataById(2)
+    return getUserDataById(-1)
       .then(userData => {
         expect(userData).to.be.null
       })

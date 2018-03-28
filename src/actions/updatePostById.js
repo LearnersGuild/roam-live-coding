@@ -21,7 +21,7 @@ const updatePostById = function(id, userId, newData) {
     AND user_id = $/userId/
     RETURNING *
   `
-  return db.oneOrNone(query, Object.assign(newData, {id}))
+  return db.oneOrNone(query, Object.assign(newData, {id, userId}))
 }
 
 module.exports = updatePostById

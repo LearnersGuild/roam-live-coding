@@ -8,7 +8,7 @@
     "db:create": "createdb roam && psql roam < src/data/schema.sql",
     "db:seed": "psql roam < src/data/seed.sql",
     "db:init": "npm run db:drop && npm run db:create && npm run db:seed",
-    "test": "export NODE_ENV=test && mocha --reporter dot test",
+    "test": "export NODE_ENV=test && mocha --reporter nyan test",
     "test:db:reset": "dropdb --if-exists roam_test && createdb roam_test && psql roam_test < src/data/schema.sql"
   },
   "repository": {

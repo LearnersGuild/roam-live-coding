@@ -30,7 +30,7 @@ describe('User Success Route', () => {
 
   before('get user from route', () =>
     chai.request(app)
-      .get('/users/2')
+      .get(`/users/${this.createdUser.id}`)
       .then(user => (this.returnUser = user.body))
   )
 

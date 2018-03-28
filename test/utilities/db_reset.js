@@ -1,6 +1,48 @@
 const db = require('../../src/db/db')
 const { encryptPassword } = require('../../src/utilities/password')
 
+/*** globals for creating stuff */
+const password = 'test'
+const city = 'Oakland'
+const image_url = ''
+const createUserQuery = `
+INSERT INTO users
+  (name, email, password, primary_city, image_url)
+VALUES
+  ($/name/, $/email/, $/password/, $/city/, $/image_url/)
+RETURNING *
+`
+const createCityQuery = `
+INSERT INTO cities
+  (name)
+VALUES
+  ($/city/)
+RETURNING *
+`
+const createPostQuery = `
+INSERT INTO posts
+  (city_id, user_id, title, body)
+VALUES
+  ($/cityId/, $/userId/, $/title/, $/body/)
+RETURNING *
+`
+
+const createCommentQuery = `
+INSERT INTO comments
+  (post_id, user_id, body)
+VALUES
+  ($/postId/, $/userId/, $/body/)
+RETURNING *
+`
+
+const userParams = { 
+  name: 'Testy Test', 
+  email: 'test@test.test',
+  city,
+  image_url
+}
+/*** end: globals for creating stuff */
+
 /**
  * Get all the tables in the current db connection.
  * @returns {Promise} - Promise resolving to array of objects each representing
@@ -36,46 +78,9 @@ const clearDb = function () {
  */
 const seedDb = () => {
 
-  const password = 'test'
-  const city = 'Oakland'
-  const image_url = ''
-  const createUserQuery = `
-  INSERT INTO users
-    (name, email, password, primary_city, image_url)
-  VALUES
-    ($/name/, $/email/, $/password/, $/city/, $/image_url/)
-  RETURNING *
-  `
-  const createCityQuery = `
-  INSERT INTO cities
-    (name)
-  VALUES
-    ($/city/)
-  RETURNING *
-  `
-  const createPostQuery = `
-  INSERT INTO posts
-    (city_id, user_id, title, body)
-  VALUES
-    ($/cityId/, $/userId/, $/title/, $/body/)
-  RETURNING *
-  `
-
-  const createCommentQuery = `
-  INSERT INTO comments
-    (post_id, user_id, body)
-  VALUES
-    ($/postId/, $/userId/, $/body/)
-  RETURNING *
-  `
-
-  const userParams = { 
-    name: 'Testy Test', 
-    email: 'test@test.test',
-    city,
-    image_url
-  }
   let userId
+
+  // create the whole first user with city, post, etc
   return encryptPassword(password)
     .then(hashedPassword => {
       userParams.password = hashedPassword
@@ -114,11 +119,30 @@ const seedDb = () => {
 }
 
 /**
+ * Add a second user (with no posts, etc) for testing purposes
+ * @returns {Promise} - Promise whose resolution is unimportant
+ */
+const addSecondUser = () => {
+  // create dummy second user
+  const userParams = { 
+    name: 'Testy Test2', 
+    email: 'test2@test.test',
+    city,
+    image_url,
+  }
+  return encryptPassword(password)
+    .then(hashedPassword => {
+      userParams.password = hashedPassword
+      return db.one(createUserQuery, userParams)
+  })
+}
+
+/**
  * Truncate all db tables and seed the db
  * @returns {promise} - promise whose resolution is unimportant
  */
 const resetDb = () => {
-  return clearDb().then(seedDb)
+  return clearDb().then(seedDb).then(addSecondUser)
 }
 
 module.exports = {

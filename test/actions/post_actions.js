@@ -70,20 +70,20 @@ describe('deletePostById', function() {
       .then(countResult => postCountBefore = countResult.count)
   })
   it('deletes the post from the database', () => {
-    return deletePostById(1)
+    return deletePostById(1, 1)
       .then(() => db.one(countQuery))
       .then(countResult => {
         expect(Number(countResult.count)).to.equal(postCountBefore - 1)
       })
     })
   it('returns id when id exists', () => {
-    return deletePostById(1)
+    return deletePostById(1, 1)
       .then(result => {
         expect(result.id).to.equal(1)
       })
   })
   it('returns null when id does not exist', () => {
-    return deletePostById(123423)
+    return deletePostById(123423, 1)
       .then(result => {
         expect(result).to.equal(null)
       })
@@ -106,7 +106,7 @@ describe('updatePostById', function() {
         before('update the column', () => {
           return resetDb() 
             .then(() => {
-              return updatePostById(1, { [prop]: newData[prop] })
+              return updatePostById(1, 1, { [prop]: newData[prop] })
             })
             .then(newPost => {
               newPostRow = newPost
@@ -131,7 +131,7 @@ describe('updatePostById', function() {
     before('update all columns', () => {
       return resetDb()
         .then(() => {
-          return updatePostById(1, newData)
+          return updatePostById(1, 1, newData)
         })
         .then(result => {
           newPostRow = result
