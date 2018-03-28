@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 class Header extends Component {
   render() {
     return (
-      <div>Hi, I'm a Header!</div>
+      <div>Traveling Very Slowly</div>
     )
   }
 }
