@@ -8,6 +8,14 @@
 
 ## Daily Log
 
+### March 28, 2018
+
+  - Start React! 
+  - Use Di's boilerplate: [http://github.com/DianaVashti/react-webpack-materialui-boilerplate.git]
+  - Add Redux
+  - Make Header component
+
+
 ### March 27, 2018
 
   - Protect `PATCH /posts/:id` (including checking for correct user) and test
