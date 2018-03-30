@@ -3,11 +3,13 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import PropTypes from 'prop-types';
 import ReactDom, { Router, Route, browserHistory } from 'react-router'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import rootReducer from './reducers'
 import LandingPage from './views/LandingPage/landingPage'
 import Header from './views/Header/Header'
+import User from './views/User/User'
+import SignIn from './views/SignIn/SignIn'
 
 const store = createStore(
   rootReducer, 
@@ -21,15 +23,17 @@ export default class ReactRouter extends Component {
 
   render() {
 
-    const landingPageComponent = (props, state, params) =>
-      <LandingPage />
+    const LandingPageComponent = (props, state, params) => <LandingPage />
+    const UserComponent = (props, state, params) => <User />
 
     return (
       <Provider store={store}>
         <div>
           <Header />
           <Router history={browserHistory}>
-            <Route path="*" component={landingPageComponent} />
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/users/:id" component={UserComponent} />
+            <Route path="*" component={LandingPageComponent} />
           </Router>
         </div>
       </Provider>

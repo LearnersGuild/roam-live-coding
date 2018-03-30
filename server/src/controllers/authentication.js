@@ -18,7 +18,7 @@ function generateToken(user) {
  * @param {object} res - response object
  */
 const signin = (req, res) => {
-  res.json({ token: generateToken(req.user) })
+  res.json({ token: generateToken(req.user), user: req.user })
 }
 
 /**
