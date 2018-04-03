@@ -8,6 +8,18 @@
 
 ## Daily Log
 
+### March 29, 2018
+
+  - Create browser history using `history` npm module
+  - Started signIn infrastructure:
+    - component
+    - actions
+    - reducer
+    - route
+  - Updated (started?) user component
+    - component
+    - route
+
 ### March 28, 2018
 
   - Start React! 
