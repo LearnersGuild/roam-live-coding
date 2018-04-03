@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### April 2, 2018
+
+  - Review code that was hastily copied and pasted on Friday
+  - Update SignIn component to display errors without using clarityui (including creating `error-alert` style)
+  - Update SignIn to bind handleFormSubmit in the constructor
+
 ### March 29, 2018
 
   - Create browser history using `history` npm module

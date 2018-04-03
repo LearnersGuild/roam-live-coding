@@ -38,16 +38,18 @@ class SignIn extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit())}>
-          <Field name="email" type="text" label="Email" required={true} component={renderClarityField} />
-          <Field name="password" type="password" label="Password" required={true} component={renderClarityField} />
-          <button action="submit" className="btn btn-primary">
-            Sign in
-          </button>
-        </form>
+      <form onSubmit={handleSubmit(this.handleFormSubmit()))}>
+        <fieldset className="form-group">
+          <label>Email:</label>
+          <input {...email} className="form-control" />
+        </fieldset>
+        <fieldset className="form-group">
+          <label>Password:</label>
+          <input {...password} type="password" className="form-control" />
+        </fieldset>
         {this.renderAlert()}
-      </div>
+        <button action="submit" className="btn btn-primary">Sign in</button>
+      </form>
     )
   }
 }
