@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import PropTypes from 'prop-types';
-import ReactDom, { Router, Route, browserHistory } from 'react-router'
+import ReactDom, { Router, Route } from 'react-router-dom'
+import browserHistory from './history'
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import rootReducer from './reducers'
@@ -31,9 +32,11 @@ export default class ReactRouter extends Component {
         <div>
           <Header />
           <Router history={browserHistory}>
-            <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/users/:id" component={UserComponent} />
-            <Route path="*" component={LandingPageComponent} />
+            <div>
+              <Route exact path="/sign-in" component={SignIn} />
+              <Route exact path="/users/:id" component={UserComponent} />
+              <Route path="*" component={LandingPageComponent} />
+            </div>
           </Router>
         </div>
       </Provider>

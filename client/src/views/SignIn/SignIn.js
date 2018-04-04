@@ -35,10 +35,18 @@ class SignIn extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    console.log('******Props:', this.props)
+
+    const { handleSubmit, fields : { email, password }} = this.props;
+    // console.log('************ password:::', password)
+    // console.log('************ email:::', email)
+
+    // or, put another way: 
+    // const { handleSubmit, fields } = this.props;
+    // const { email, password } = fields;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit()))}>
+      <form onSubmit={handleSubmit(this.handleFormSubmit())}>
         <fieldset className="form-group">
           <label>Email:</label>
           <input {...email} className="form-control" />

@@ -8,6 +8,12 @@
 
 ## Daily Log
 
+### April 3, 2018
+
+  - Epic battle with `react-router`, `history`, `react-router-dom`, `redux-form`, semver.
+  - Finally upgraded to latest version (4.x) of everything, and updated code accordingly. 
+  - To do tomorrow: use Field component instead of <input> to take advantage of `redux-form` / use latest version of `redux-form` properly
+
 ### April 2, 2018
 
   - Review code that was hastily copied and pasted on Friday

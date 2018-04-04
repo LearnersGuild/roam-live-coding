@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
   single page app. See this link for more info:
   https://knowbody.github.io/react-router-docs/api/Link.html
 */
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 /*
   I recommend one component per file. Import components as seen below.
   This page currently imports and renders only a <div> with our HelloWorld
