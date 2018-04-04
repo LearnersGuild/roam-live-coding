@@ -37,7 +37,7 @@ export default class ReactRouter extends Component {
             <div>
               <Route exact path="/sign-in" component={SignIn} />
               <Route exact path="/users/:id" component={UserComponent} />
-              <Route path="*" component={LandingPageComponent} />
+              <Route exact path="/" component={LandingPageComponent} />
             </div>
           </Router>
         </div>
