@@ -6,12 +6,18 @@
 const path = require ('path')
 require('dotenv').config({path: path.join(__dirname, '../.env')})
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const cityRouter = require('./routes/cities')
 const userRouter = require('./routes/users')
 const postRouter = require('./routes/posts')
 const authRouter = require('./routes/auth')
 const app = express()
+
+app.use(cors({
+  origin: 'http://localhost:3333',
+  credentials: true
+}))
 
 app.use(bodyParser.json())
 app.use('/cities', cityRouter)

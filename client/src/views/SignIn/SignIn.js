@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import Input from '../../components/Input'
 import { signInUser, setAuthError } from '../../actions'
 
 const fields = ['email', 'password']
@@ -35,28 +36,20 @@ class SignIn extends Component {
   }
 
   render() {
-    console.log('******Props:', this.props)
+    // console.log('******Props:', this.props)
 
     const { handleSubmit, fields : { email, password }} = this.props;
-    // console.log('************ password:::', password)
-    // console.log('************ email:::', email)
-
     // or, put another way: 
     // const { handleSubmit, fields } = this.props;
     // const { email, password } = fields;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit())}>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <input {...email} className="form-control" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password:</label>
-          <input {...password} type="password" className="form-control" />
-        </fieldset>
+      <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+        <Field name="email" label="Email" type="email" required="true" component={Input} />
+        <Field name="password" label="Password" type="password" required="true" component={Input} />
+        <Field name="frank" label="Frank" type="frank" component={Input} />
         {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">Sign in</button>
+        <button action="submit">Sign in</button>
       </form>
     )
   }

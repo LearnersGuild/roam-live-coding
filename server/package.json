@@ -8,6 +8,7 @@
     "db:create": "createdb roam && psql roam < src/data/schema.sql",
     "db:seed": "psql roam < src/data/seed.sql",
     "db:init": "npm run db:drop && npm run db:create && npm run db:seed",
+    "start": "nodemon src/index.js",
     "test": "export NODE_ENV=test && mocha --reporter nyan test",
     "test:db:reset": "dropdb --if-exists roam_test && createdb roam_test && psql roam_test < src/data/schema.sql"
   },
@@ -26,6 +27,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "connect-pg-simple": "^4.2.1",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
     "eslint": "^4.16.0",

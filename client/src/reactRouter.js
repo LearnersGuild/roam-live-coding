@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import PropTypes from 'prop-types';
 import ReactDom, { Router, Route } from 'react-router-dom'
 import browserHistory from './history'
+import thunk from 'redux-thunk'
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import rootReducer from './reducers'
@@ -13,8 +14,9 @@ import User from './views/User/User'
 import SignIn from './views/SignIn/SignIn'
 
 const store = createStore(
-  rootReducer, 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk),
 )
 
 export default class ReactRouter extends Component {
