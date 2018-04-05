@@ -20,7 +20,7 @@
     - Create component (close copy of the SignIn component)
     - Create signUpUser action
 
-  Tomorrow: 
+  - Tomorrow: 
     - fix bug in signUpUser action where it's not sending data to server
     - form validation on signUp form
 
