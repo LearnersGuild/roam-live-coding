@@ -13,7 +13,6 @@ import {
 const authHandler = (response, dispatch) => {
   // if request is good...
   // - update state to indicate user is authenticated
-  console.log('response data', response.data)
   dispatch({ type: AUTH_USER, payload: { user: response.data.user } })
 
   // - save the JWT in browser "local storage" 
@@ -21,7 +20,7 @@ const authHandler = (response, dispatch) => {
   localStorage.setItem('token', response.data.token)
 
   // - redirect to the route 
-  browserHistory.push(`/users/${response.data.user.id}`)
+  browserHistory.push(`/user`)
 }
 
 const signInUser = ({ email, password }) => {
