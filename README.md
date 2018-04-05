@@ -8,6 +8,22 @@
 
 ## Daily Log
 
+### April 4, 2018
+
+  - Complete SignIn component
+    - create an Input component for redux-form Field
+    - enable cors on the server
+
+  - Update router so landing page doesn't show on other pages.
+
+  - WIP: start SignUp component
+    - Create component (close copy of the SignIn component)
+    - Create signUpUser action
+
+  Tomorrow: 
+    - fix bug in signUpUser action where it's not sending data to server
+    - form validation on signUp form
+
 ### April 3, 2018
 
   - Epic battle with `react-router`, `history`, `react-router-dom`, `redux-form`, semver.
