@@ -12,6 +12,7 @@ import LandingPage from './views/LandingPage/landingPage'
 import Header from './views/Header/Header'
 import User from './views/User/User'
 import SignIn from './views/SignIn/SignIn'
+import SignUp from './views/SignUp/SignUp'
 
 const store = createStore(
   rootReducer,
@@ -36,6 +37,7 @@ export default class ReactRouter extends Component {
           <Router history={browserHistory}>
             <div>
               <Route exact path="/sign-in" component={SignIn} />
+              <Route exact path="/sign-up" component={SignUp} />
               <Route exact path="/users/:id" component={UserComponent} />
               <Route exact path="/" component={LandingPageComponent} />
             </div>

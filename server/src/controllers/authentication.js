@@ -32,6 +32,11 @@ const signup = (req, res) => {
 
   // make sure email and password aren't empty
   if (!email || !password || !primary_city) {
+    console.log('************ primary_city:::', primary_city)
+    console.log('************ password:::', password)
+    console.log('************ email:::', email)
+    
+    console.log('you don\'t have all the info!')
     return res.status(422).json({ message: 'email, password, and primary city must not be blank' })
   }
 
@@ -39,6 +44,7 @@ const signup = (req, res) => {
   return getUserByEmail(email)
     .then(user => {
       if (user) {
+        console.log('email already exists!')
         return res.status(422).json({ message: 'email already exists' })
       }
       // add the user to the db

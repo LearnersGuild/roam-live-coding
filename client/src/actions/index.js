@@ -39,6 +39,20 @@ const signInUser = ({ email, password }) => {
   }
 }
 
+const signUpUser = ({ email, primary_city, password }) => {
+  return function(dispatch) {
+    // submit email/password to api server
+    axios.post(`${ROOT_URL}/auth/sign-up`, { email, primary_city, password })
+      .then((response) => authHandler(response, dispatch))
+      .catch((error) => {
+        // if request is bad...
+        // - Show an error to the user
+        console.error(error)
+        dispatch(setAuthError('Bad login info'))
+      })
+  }
+}
+
 const setAuthError = (error) => {
   return {
     type: AUTH_ERROR,
@@ -48,7 +62,7 @@ const setAuthError = (error) => {
 
 module.exports = {
   signInUser,
-  // signUpUser,
+  signUpUser,
   // signOutUser,
   setAuthError,
 }
