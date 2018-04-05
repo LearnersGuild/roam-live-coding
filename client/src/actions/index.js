@@ -40,6 +40,7 @@ const signInUser = ({ email, password }) => {
 }
 
 const signUpUser = ({ email, primary_city, password }) => {
+  console.log('signUpUserargs', [email, primary_city, password].join('\n'))
   return function(dispatch) {
     // submit email/password to api server
     axios.post(`${ROOT_URL}/auth/sign-up`, { email, primary_city, password })

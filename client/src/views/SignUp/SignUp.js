@@ -21,6 +21,8 @@ class SignUp extends Component {
   }
 
   handleFormSubmit({ email, primary_city, password }) {
+    console.log('handleFormSubmit args', [email, primary_city, password].join('\n'))
+
     // log user in
     this.props.signUpUser({ email, primary_city, password })
   }
@@ -50,7 +52,7 @@ class SignUp extends Component {
         <Field name="password" label="Password" type="password" required="true" component={Input} />
         <Field name="passwordConfirm" label="Confirm Password" type="password" required="true" component={Input} />
         {this.renderAlert()}
-        <button action="submit">Sign up</button>
+        <button type="submit">Sign up</button>
       </form>
     )
   }
