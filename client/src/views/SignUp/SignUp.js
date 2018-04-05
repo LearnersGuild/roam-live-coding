@@ -20,8 +20,8 @@ class SignUp extends Component {
 
   }
 
-  handleFormSubmit({ email, primary_city, password }) {
-    console.log('handleFormSubmit args', [email, primary_city, password].join('\n'))
+  handleFormSubmit(values) {
+    const { email, primary_city, password } = values
 
     // log user in
     this.props.signUpUser({ email, primary_city, password })

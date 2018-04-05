@@ -10,7 +10,7 @@ export default function(props) {
   return (
   <fieldset >
     <label>{props.label}</label>
-    <input name={props.input.name} type={props.type}/>
+    <input {...props.input} type={props.type}/>
     {error}
   </fieldset>
   )

@@ -13,6 +13,7 @@ import {
 const authHandler = (response, dispatch) => {
   // if request is good...
   // - update state to indicate user is authenticated
+  console.log('response data', response.data)
   dispatch({ type: AUTH_USER, payload: { user: response.data.user } })
 
   // - save the JWT in browser "local storage" 
@@ -40,7 +41,6 @@ const signInUser = ({ email, password }) => {
 }
 
 const signUpUser = ({ email, primary_city, password }) => {
-  console.log('signUpUserargs', [email, primary_city, password].join('\n'))
   return function(dispatch) {
     // submit email/password to api server
     axios.post(`${ROOT_URL}/auth/sign-up`, { email, primary_city, password })
