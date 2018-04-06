@@ -26,7 +26,9 @@ export default class LandingPage extends Component {
   render() {
     return (
       <div>
-        <HelloWorld />
+        <div><Link to="/sign-in">Sign in</Link></div>
+        or
+        <div><Link to="/sign-up">Sign up</Link></div>
       </div>
     )
   }

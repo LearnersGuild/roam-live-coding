@@ -53,6 +53,13 @@ const signUpUser = ({ email, primary_city, password }) => {
   }
 }
 
+const signOutUser = () => {
+  localStorage.removeItem('token')
+  return {
+    type: UNAUTH_USER
+  }
+}
+
 const setAuthError = (error) => {
   return {
     type: AUTH_ERROR,
@@ -63,6 +70,6 @@ const setAuthError = (error) => {
 module.exports = {
   signInUser,
   signUpUser,
-  // signOutUser,
+  signOutUser,
   setAuthError,
 }

@@ -8,6 +8,20 @@
 
 ## Daily Log
 
+### April 5 2018
+
+  [YouTube link to recording](https://youtu.be/4iFSY-8GCko)
+
+  - Spend a long time figuring out what we forgot when wiring up redux-form
+  - Complete SignUp component
+    - but no form validation
+  - Complete sign out action and reducer case
+
+  - Still to do:
+    - Use a HOC to protect components that require authentication (see Stephen Grider's advanced react Udemy course)
+    - Allow login to persist even after refresh (ditto on Udemy course)
+    - Create all the other views / functionality (great React/Redux practice!)
+
 ### April 4, 2018
 
   - Complete SignIn component
