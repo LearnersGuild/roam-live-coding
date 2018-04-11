@@ -8,6 +8,19 @@
 
 ## Daily Log
 
+### April 10 2018
+
+- Get app setup and running
+  - Add .env file
+  - Run database setup commands
+  - Run tests
+  - Review what specific tests are running
+- Talk through learning your way around an unfamiliar web application
+  - Look in the `package.json` file to learn what tools/technology you're using (or whatever similar package manager-generated file exists depending on what language and framework you're working with, e.g. Gemfile for Ruby, mix.exs file for Elixir, etc)
+  - Look for a "routes" or "router" file to see what pages and actions are available to the user
+  - Look for a database schema file or a set of migrations (or both) to see what kinds of objects we're storing data on
+- Discuss the degree to which this strategy for learning your way around apps should hold for various technologies (should be at least fairly similar across most MVC web apps)
+
 ### April 5 2018
 
   [YouTube link to recording](https://youtu.be/4iFSY-8GCko)
