@@ -1,5 +1,18 @@
 # Live code of Roam (Learners Guild Project)
 
+## Instructions
+
+If you want to run Roam-Live-Code on your local machine, here are the steps to take:
+
+- Fork and clone the repository.
+- `npm install` to get all required packages and dependencies.
+- Run `npm run db:init` to set up the PostgreSQL database.
+- Create a `.env` file inside of the _server_ folder. It should have your own values for the following:
+  - `DB_URL`
+  - `TEST_DB_URL`
+  - `SECRET` (this is for the JWT Strategy)
+- `npm start` to run the server in development mode with nodemon.
+
 ## Links
 
 - [Module](https://curriculum.learnersguild.org/Phases/Practice/Modules/Roam/)
@@ -34,14 +47,14 @@
     - Create component (close copy of the SignIn component)
     - Create signUpUser action
 
-  - Tomorrow: 
+  - Tomorrow:
     - fix bug in signUpUser action where it's not sending data to server
     - form validation on signUp form
 
 ### April 3, 2018
 
   - Epic battle with `react-router`, `history`, `react-router-dom`, `redux-form`, semver.
-  - Finally upgraded to latest version (4.x) of everything, and updated code accordingly. 
+  - Finally upgraded to latest version (4.x) of everything, and updated code accordingly.
   - To do tomorrow: use Field component instead of <input> to take advantage of `redux-form` / use latest version of `redux-form` properly
 
 ### April 2, 2018
@@ -64,7 +77,7 @@
 
 ### March 28, 2018
 
-  - Start React! 
+  - Start React!
   - Use Di's boilerplate: [http://github.com/DianaVashti/react-webpack-materialui-boilerplate.git]
   - Add Redux
   - Make Header component
@@ -165,12 +178,12 @@
 
 ### February 21, 2018
 
-  - Completed `deletePostById` (including tests). 
+  - Completed `deletePostById` (including tests).
   - Started to write `updatePostById` and tests
 
 ### February 16, 2018
 
-  - Completed `getPostById` (including tests). 
+  - Completed `getPostById` (including tests).
   - Started to write `deletePostById` and tests
 
 ### February 15, 2018
@@ -199,7 +212,7 @@
   - Discussed possible options for testing `getUserByEmail`:
     - Test for existence of each property individually
     - Create an object that represents all expected properties and values and do a "deep equal"
-    - Create a set of properties, and a set of expected properties, and compare. 
+    - Create a set of properties, and a set of expected properties, and compare.
   - Decided on (and coded) option 1
 
 ### February 6, 2018
@@ -207,7 +220,7 @@
 #### Part I (9:15 - 10:00)
   - Researched `bcrypt` vs `bcryptjs`; decided on the latter
   - Completed `encryptPassword` and `comparePassword` functions in `password.js`
-  - Added test to check that password was encrypted properly 
+  - Added test to check that password was encrypted properly
   - Discussed testing functions that return promises (and how easy it is to get false positives)
 
 #### Part II (10:15 - 12:00)
