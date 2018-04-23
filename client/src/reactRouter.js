@@ -13,7 +13,6 @@ import Header from './views/Header/Header'
 import User from './views/User/User'
 import SignIn from './views/SignIn/SignIn'
 import SignUp from './views/SignUp/SignUp'
-import { getCurrentUser } from './actions'
 
 const store = createStore(
   rootReducer,
@@ -24,11 +23,6 @@ const store = createStore(
 export default class ReactRouter extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentWillMount(){
-    console.log('Inside componentWillMount!!!')
-    getCurrentUser()
   }
 
   render() {

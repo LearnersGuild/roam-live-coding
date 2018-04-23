@@ -30,6 +30,7 @@ const signInUser = ({ email, password }) => {
   // instead of returning an object, we can return a function
   // redux-thunk gives arbitrary access to dispatch method
   return function(dispatch) {
+    console.log('Inside function call for signInUser')
     // submit email/password to api server
     axios.post(`${ROOT_URL}/auth/sign-in`, { email, password })
       .then((response) => authHandler(response, dispatch))
@@ -45,7 +46,7 @@ const getCurrentUser = () => {
   console.log("Inside getCurrentUser")
   const token = localStorage.getItem('token')
 
-  // return (dispatch) => {
+  return (dispatch) => {
     axios({
       method: 'GET',
       url: `${ROOT_URL}/auth/current-user`,
@@ -54,12 +55,12 @@ const getCurrentUser = () => {
       console.log("Response to /auth/current-user request:", response)
       dispatch({
         type: AUTH_USER,
-        payload: { user: response.data.user }
+        payload: { user: response.data.sub }
       })
     }).catch((error) => {
       dispatch(setAuthError('Bad token'))
     })
-  // }
+  }
 }
 
 const signUpUser = ({ email, primary_city, password }) => {
