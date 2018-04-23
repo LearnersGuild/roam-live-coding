@@ -8,6 +8,14 @@
 
 ## Daily Log
 
+### April 12 2018
+Goals:
+- Preserve session after page reloads (with localStorage? Other solutions?)
+- Guard routes with higher-order components
+- Show appropriate errors for bad sign-in attempts
+
+
+
 ### April 10 2018
 
 - Get app setup and running
