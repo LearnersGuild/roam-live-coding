@@ -12,6 +12,26 @@ function generateToken(user) {
 }
 
 /**
+ * Express function meant to be used to extract user data
+ * from jwt and send it back to the client
+ * @param {object} req - request object
+ * @param {object} res - response object
+ */
+const getCurrentUser = (req, res) => {
+  const token = req.headers.authorization
+  const userInfo = jwt.decode(token, process.env.SECRET)
+  return res.json(userInfo)
+}
+
+/**
+ * Extract user data from web token
+ * @param {object} token - jwt containing signed in user data
+ */
+function getUserFromToken(token) {
+  return jwt.decode(token, process.env.SECRET)
+}
+
+/**
  * Express function meant to be used after passport middleware has
  * successfully passed local auth, to send jwt back to client
  * @param {object} req - request object
@@ -59,5 +79,6 @@ const signup = (req, res) => {
 module.exports = {
   signin,
   signup,
+  getCurrentUser,
   generateToken,
 }

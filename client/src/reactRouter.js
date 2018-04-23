@@ -13,6 +13,7 @@ import Header from './views/Header/Header'
 import User from './views/User/User'
 import SignIn from './views/SignIn/SignIn'
 import SignUp from './views/SignUp/SignUp'
+import { getCurrentUser } from './actions'
 
 const store = createStore(
   rootReducer,
@@ -25,8 +26,12 @@ export default class ReactRouter extends Component {
     super(props)
   }
 
-  render() {
+  componentWillMount(){
+    console.log('Inside componentWillMount!!!')
+    getCurrentUser()
+  }
 
+  render() {
     const LandingPageComponent = (props, state, params) => <LandingPage />
     const UserComponent = (props, state, params) => <User />
 

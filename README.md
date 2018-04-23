@@ -8,13 +8,18 @@
 
 ## Daily Log
 
+### April 20 2018
+- Added `getCurrentUser` function to the client to send a request for user data on page load if token is present. This feature is not yet fully functional.
+- Added a corresponding route on the server side.
+
 ### April 12 2018
 Goals:
 - Preserve session after page reloads (with localStorage? Other solutions?)
 - Guard routes with higher-order components
 - Show appropriate errors for bad sign-in attempts
 
-
+Accomplishments:
+- Didn't add new code. Learned some stuff about how auth may be intended to work.
 
 ### April 10 2018
 

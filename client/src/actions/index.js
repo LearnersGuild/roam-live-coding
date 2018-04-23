@@ -11,6 +11,8 @@ import {
 } from './actionTypes'
 
 const authHandler = (response, dispatch) => {
+  console.log('Response:', response)
+
   // if request is good...
   // - update state to indicate user is authenticated
   dispatch({ type: AUTH_USER, payload: { user: response.data.user } })
@@ -24,7 +26,7 @@ const authHandler = (response, dispatch) => {
 }
 
 const signInUser = ({ email, password }) => {
-  // because we have redux-thunk middleware, 
+  // because we have redux-thunk middleware,
   // instead of returning an object, we can return a function
   // redux-thunk gives arbitrary access to dispatch method
   return function(dispatch) {
@@ -37,6 +39,27 @@ const signInUser = ({ email, password }) => {
         dispatch(setAuthError('Bad login info'))
       })
   }
+}
+
+const getCurrentUser = () => {
+  console.log("Inside getCurrentUser")
+  const token = localStorage.getItem('token')
+
+  // return (dispatch) => {
+    axios({
+      method: 'GET',
+      url: `${ROOT_URL}/auth/current-user`,
+      headers: { 'authorization': token },
+    }).then((response) => {
+      console.log("Response to /auth/current-user request:", response)
+      dispatch({
+        type: AUTH_USER,
+        payload: { user: response.data.user }
+      })
+    }).catch((error) => {
+      dispatch(setAuthError('Bad token'))
+    })
+  // }
 }
 
 const signUpUser = ({ email, primary_city, password }) => {
@@ -71,5 +94,6 @@ module.exports = {
   signInUser,
   signUpUser,
   signOutUser,
+  getCurrentUser,
   setAuthError,
 }
