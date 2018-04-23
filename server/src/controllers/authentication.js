@@ -19,8 +19,13 @@ function generateToken(user) {
  */
 const getCurrentUser = (req, res) => {
   const token = req.headers.authorization
-  const userInfo = jwt.decode(token, process.env.SECRET)
-  return res.json(userInfo)
+  const userInfo = getUserFromToken(token, process.env.SECRET)
+
+  if (userInfo.sub) {
+    return res.json(userInfo)
+  } else {
+    return res.status(400).json({})
+  }
 }
 
 /**

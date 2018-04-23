@@ -4,6 +4,7 @@ const chaiHttp = require('chai-http')
 const { resetDb } = require('../utilities/db_reset')
 const app = require('../../src')
 const getUserByEmail = require('../../src/actions/getUserByEmail')
+const jwt = require('jwt-simple')
 
 chai.use(chaiHttp)
 
@@ -38,6 +39,31 @@ describe('/auth/sign-in', () => {
       .post('/auth/sign-in')
       .send({ email: 'hpotter@gmail.com', password: 'hedwig4ever' })
       .catch(err => expect(err.response).to.have.status(401))
+  })
+})
+
+describe('/auth/current-user', () => {
+  beforeEach('reset db', () => {
+    return resetDb()
+  })
+  it('returns id of the user from the token data', () => {
+    const timestamp = new Date().getTime()
+    const goodToken = jwt.encode({ sub: 1, iat: timestamp }, process.env.SECRET)
+
+    return chai.request(app)
+      .get('/auth/current-user')
+      .set('authorization', goodToken)
+      .then(response => {
+        expect(response.body.sub).to.equal(1)
+      })
+  })
+
+  it('returns 400 status for token without data', () => {
+    const emptyToken = jwt.encode({}, process.env.SECRET)
+    return chai.request(app)
+      .get('/auth/current-user')
+      .set('authorization', emptyToken)
+      .catch(err => expect(err.response).to.have.status(400))
   })
 })
 
