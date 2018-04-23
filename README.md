@@ -8,6 +8,10 @@
 
 ## Daily Log
 
+### April 23 2018
+- Got `getCurrentUser` request and handling working
+- Added tests for jwt behavior in `getCurrentUser`
+
 ### April 20 2018
 - Added `getCurrentUser` function to the client to send a request for user data on page load if token is present. This feature is not yet fully functional.
 - Added a corresponding route on the server side.
