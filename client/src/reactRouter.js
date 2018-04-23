@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import rootReducer from './reducers'
+import UserLoader from './components/UserLoader'
 import LandingPage from './views/LandingPage/landingPage'
 import Header from './views/Header/Header'
 import User from './views/User/User'
@@ -31,7 +32,7 @@ export default class ReactRouter extends Component {
 
     return (
       <Provider store={store}>
-        <div>
+        <UserLoader>
           <Header />
           <Router history={browserHistory}>
             <div>
@@ -41,7 +42,7 @@ export default class ReactRouter extends Component {
               <Route exact path="/" component={LandingPageComponent} />
             </div>
           </Router>
-        </div>
+        </UserLoader>
       </Provider>
     )
   }

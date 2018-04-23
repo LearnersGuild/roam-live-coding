@@ -11,8 +11,6 @@ import {
 } from './actionTypes'
 
 const authHandler = (response, dispatch) => {
-  console.log('Response:', response)
-
   // if request is good...
   // - update state to indicate user is authenticated
   dispatch({ type: AUTH_USER, payload: { user: response.data.user } })
@@ -30,7 +28,6 @@ const signInUser = ({ email, password }) => {
   // instead of returning an object, we can return a function
   // redux-thunk gives arbitrary access to dispatch method
   return function(dispatch) {
-    console.log('Inside function call for signInUser')
     // submit email/password to api server
     axios.post(`${ROOT_URL}/auth/sign-in`, { email, password })
       .then((response) => authHandler(response, dispatch))
@@ -42,17 +39,13 @@ const signInUser = ({ email, password }) => {
   }
 }
 
-const getCurrentUser = () => {
-  console.log("Inside getCurrentUser")
-  const token = localStorage.getItem('token')
-
+const getCurrentUser = (token) => {
   return (dispatch) => {
     axios({
       method: 'GET',
       url: `${ROOT_URL}/auth/current-user`,
       headers: { 'authorization': token },
     }).then((response) => {
-      console.log("Response to /auth/current-user request:", response)
       dispatch({
         type: AUTH_USER,
         payload: { user: response.data.sub }
