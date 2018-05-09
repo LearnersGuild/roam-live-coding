@@ -13,7 +13,7 @@ authRouter.post('/sign-in', requireSignin, Authentication.signin)
 /////////// sign-up /////////////
 authRouter.post('/sign-up', Authentication.signup)
 
-/////////// sign-up /////////////
+/////////// get user data /////////////
 authRouter.get('/current-user', Authentication.getCurrentUser)
 
 module.exports = authRouter

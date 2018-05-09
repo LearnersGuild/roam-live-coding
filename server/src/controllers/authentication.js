@@ -8,7 +8,11 @@ const addUser = require('../actions/addUser')
  */
 function generateToken(user) {
   const timestamp = new Date().getTime()
-  return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET)
+  return jwt.encode({ sub: {
+      id: user.id,
+      name: user.name,
+      email: user.email
+    }, iat: timestamp }, process.env.SECRET)
 }
 
 /**
