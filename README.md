@@ -8,6 +8,10 @@
 
 ## Daily Log
 
+### May 9 2018
+- Fixed bug where main page wouldn't show user id
+- Moved conditional behavior for showing user info OR showing login link into a higher-order component
+
 ### April 23 2018
 - Got `getCurrentUser` request and handling working
 - Added tests for jwt behavior in `getCurrentUser`
